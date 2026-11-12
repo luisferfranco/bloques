@@ -21,4 +21,7 @@ class Tenant extends Model
   public function users(): BelongsToMany {
     return $this->belongsToMany(User::class);
   }
+  public function pages(): HasMany {
+    return $this->hasMany(Page::class);
+  }
 }

@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Models;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasTenants;
+use Filament\Panel;
+use Illuminate\Support\Collection;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
@@ -14,7 +18,7 @@ use App\Models\Tenant;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasTenants
 {
   /** @use HasFactory<UserFactory> */
   use HasFactory, Notifiable;
@@ -34,5 +38,22 @@ class User extends Authenticatable
 
   public function tenants(): BelongsToMany {
     return $this->belongsToMany(Tenant::class);
+  }
+
+  public function getTenants(Panel $panel): Collection
+  {
+    return $this->tenants;
+  }
+
+  public function canAccessTenant(\Illuminate\Database\Eloquent\Model $tenant): bool
+  {
+    return $this->tenants()
+      ->whereKey($tenant)
+      ->exists();
+  }
+
+  public function canAccessPanel(Panel $panel): bool
+  {
+    return true; // Sustituir por tus reglas de acceso.
   }
 }
