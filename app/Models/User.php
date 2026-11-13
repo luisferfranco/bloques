@@ -5,6 +5,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
@@ -37,19 +38,24 @@ class User extends Authenticatable implements FilamentUser, HasTenants
   }
 
   public function tenants(): BelongsToMany {
-    return $this->belongsToMany(Tenant::class);
+    return $this->belongsToMany(Tenant::class)
+      ->withTimestamps();
   }
 
   public function getTenants(Panel $panel): Collection
   {
-    return $this->tenants;
+    return $this->tenants()
+      ->where('tenants.is_active', true)
+      ->get();
   }
 
-  public function canAccessTenant(\Illuminate\Database\Eloquent\Model $tenant): bool
+  public function canAccessTenant(Model $tenant): bool
   {
-    return $this->tenants()
-      ->whereKey($tenant)
-      ->exists();
+    return $tenant instanceof Tenant
+      && $tenant->is_active
+      && $this->tenants()
+        ->whereKey($tenant)
+        ->exists();
   }
 
   public function canAccessPanel(Panel $panel): bool

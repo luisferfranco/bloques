@@ -19,6 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Enums\DatabaseNotificationsPosition;
+use App\Models\Tenant;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -30,6 +31,10 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->spa()
             ->login()
+            ->tenant(
+              Tenant::class,
+              slugAttribute: 'slug',
+            )
             ->databaseNotifications(position: DatabaseNotificationsPosition::Sidebar)
             ->colors([
                 'primary' => Color::Amber,
