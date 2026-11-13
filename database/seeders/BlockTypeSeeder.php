@@ -3,41 +3,43 @@
 namespace Database\Seeders;
 
 use App\Models\BlockType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class BlockTypeSeeder extends Seeder
 {
-  /**
-   * Run the database seeds.
-   */
   public function run(): void
   {
     $types = [
       [
         'name' => 'Hero',
         'slug' => 'hero',
-        'description' => 'Hero Component',
-        'component' => 'hero',
+        'description' => 'Sección principal de presentación.',
+        'component' => 'blocks.hero',
+        'is_active' => true,
+        'is_premium' => false,
       ],
       [
-        'name' => 'Misión/Visión',
-        'slug' => 'mission',
-        'description' => 'Mission Component',
-        'component' => 'mission',
+        'name' => 'Misión y Visión',
+        'slug' => 'mision-vision',
+        'description' => 'Sección para presentar la misión y visión.',
+        'component' => 'blocks.mision-vision',
+        'is_active' => true,
+        'is_premium' => false,
       ],
       [
-        'name' => 'Text',
-        'slug' => 'text',
-        'description' => 'Text Component',
-        'component' => 'text',
+        'name' => 'Texto',
+        'slug' => 'texto',
+        'description' => 'Sección de contenido textual.',
+        'component' => 'blocks.texto',
+        'is_active' => true,
+        'is_premium' => false,
       ],
     ];
 
     foreach ($types as $type) {
       BlockType::updateOrCreate(
         ['slug' => $type['slug']],
-        $type
+        $type,
       );
     }
   }
