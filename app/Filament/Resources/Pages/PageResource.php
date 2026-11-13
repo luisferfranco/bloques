@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Filament\Resources\Pages;
-
 use App\Filament\Resources\Pages\Pages\CreatePage;
 use App\Filament\Resources\Pages\Pages\EditPage;
 use App\Filament\Resources\Pages\Pages\ListPages;
@@ -14,6 +13,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\Pages\RelationManagers\BlocksRelationManager;
 
 class PageResource extends Resource
 {
@@ -36,7 +36,7 @@ class PageResource extends Resource
   public static function getRelations(): array
   {
     return [
-      //
+      BlocksRelationManager::class,
     ];
   }
 
@@ -54,4 +54,6 @@ class PageResource extends Resource
     return parent::getEloquentQuery()
       ->orderBy('sort_order');
   }
+
+
 }
