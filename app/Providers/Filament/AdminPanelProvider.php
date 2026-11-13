@@ -20,6 +20,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Enums\DatabaseNotificationsPosition;
 use App\Models\Tenant;
+use App\Filament\Pages\CreateTenant;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -35,6 +36,7 @@ class AdminPanelProvider extends PanelProvider
               Tenant::class,
               slugAttribute: 'slug',
             )
+            ->tenantRegistration(CreateTenant::class)
             ->databaseNotifications(position: DatabaseNotificationsPosition::Sidebar)
             ->colors([
                 'primary' => Color::Amber,
