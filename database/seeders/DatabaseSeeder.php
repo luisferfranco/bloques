@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
 
     $this->call([
       TenantSeeder::class,
-      PageTypeSeeder::class
+      PageTypeSeeder::class,
+      BlockTypeSeeder::class,
     ]);
   }
 }

@@ -32,13 +32,17 @@
       "03h82tntik3j2uz7yjqvqi01o",
       "03h82wh3wtr45jw57a8uiua31",
       "03h82whevb5trwex5s5mlc87g",
-      "03h82wuub0xe3qjcygfngka45"
+      "03h82wuub0xe3qjcygfngka45",
+      "03h86hk8059y3bnx7qa4naw83",
+      "03h86hzm9iebd0gjk1lk7yo0z"
     ],
     "relationshipIds": [
       "03h82tx4ewuc064eukurm4aoa",
       "03h82wwywmpxa89hjbxmku4kr",
       "03h82wxkr0mx77kdiqlctylx4",
-      "03h82wzkqwenxz1kxm2fh0pr6"
+      "03h82wzkqwenxz1kxm2fh0pr6",
+      "03h86i9m610n3slm9zklcrdxp",
+      "03h86iacx2siyd81cemhuvlgo"
     ]
   },
   "collections": {
@@ -115,6 +119,41 @@
         "ui": {
           "x": 809,
           "y": 213.0002
+        }
+      },
+      "03h86hk8059y3bnx7qa4naw83": {
+        "id": "03h86hk8059y3bnx7qa4naw83",
+        "name": "block_type",
+        "columnIds": [
+          "03h86hn0qrqpsomawee6djfrm",
+          "03h86hotctudsmcjzfs8mmaxe",
+          "03h86jsm7dxadum8jdl8ukidk",
+          "03h86hq4shubhp4k58fxi7fmp",
+          "03h86hr7nyfohud59i47zi9ia",
+          "03h86hvq4l6fshm8nvkkbwxo2",
+          "03h86hx2emqgpvsdqus69w49g"
+        ],
+        "ui": {
+          "x": 702,
+          "y": 765
+        }
+      },
+      "03h86hzm9iebd0gjk1lk7yo0z": {
+        "id": "03h86hzm9iebd0gjk1lk7yo0z",
+        "name": "blocks",
+        "columnIds": [
+          "03h86i2l245uab0gj3xoefqba",
+          "03h86iacx2siyd81cej0ypaug",
+          "03h86i9m5kna7zf40hygwkg7l",
+          "03h86i3n2frsco78qkrkzdofr",
+          "03h86i4vhsrgk2c82er9jdgx5",
+          "03h86i6l0yua75ma0iu28y39u",
+          "03h86i7pauyo798dn94ijlxor",
+          "03h86jduuj9lmfemwr1g9f8ky"
+        ],
+        "ui": {
+          "x": 202,
+          "y": 753
         }
       }
     },
@@ -290,6 +329,115 @@
         "name": "tenant_id",
         "dataType": "INT",
         "options": 8
+      },
+      "03h86hn0qrqpsomawee6djfrm": {
+        "id": "03h86hn0qrqpsomawee6djfrm",
+        "tableId": "03h86hk8059y3bnx7qa4naw83",
+        "name": "id",
+        "dataType": "INT",
+        "options": 10
+      },
+      "03h86hotctudsmcjzfs8mmaxe": {
+        "id": "03h86hotctudsmcjzfs8mmaxe",
+        "tableId": "03h86hk8059y3bnx7qa4naw83",
+        "name": "name",
+        "dataType": "VARCHAR",
+        "options": 8
+      },
+      "03h86hq4shubhp4k58fxi7fmp": {
+        "id": "03h86hq4shubhp4k58fxi7fmp",
+        "tableId": "03h86hk8059y3bnx7qa4naw83",
+        "name": "description",
+        "dataType": "TEXT",
+        "options": 8
+      },
+      "03h86hr7nyfohud59i47zi9ia": {
+        "id": "03h86hr7nyfohud59i47zi9ia",
+        "tableId": "03h86hk8059y3bnx7qa4naw83",
+        "name": "component",
+        "dataType": "VARCHAR",
+        "options": 8
+      },
+      "03h86hvq4l6fshm8nvkkbwxo2": {
+        "id": "03h86hvq4l6fshm8nvkkbwxo2",
+        "tableId": "03h86hk8059y3bnx7qa4naw83",
+        "name": "is_active",
+        "dataType": "BOOL",
+        "default": "true",
+        "options": 8
+      },
+      "03h86hx2emqgpvsdqus69w49g": {
+        "id": "03h86hx2emqgpvsdqus69w49g",
+        "tableId": "03h86hk8059y3bnx7qa4naw83",
+        "name": "is_premium",
+        "dataType": "BOOL",
+        "default": "false",
+        "options": 8
+      },
+      "03h86jsm7dxadum8jdl8ukidk": {
+        "id": "03h86jsm7dxadum8jdl8ukidk",
+        "tableId": "03h86hk8059y3bnx7qa4naw83",
+        "name": "slug",
+        "dataType": "VARCHAR",
+        "options": 8
+      },
+      "03h86i2l245uab0gj3xoefqba": {
+        "id": "03h86i2l245uab0gj3xoefqba",
+        "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+        "name": "id",
+        "dataType": "INT",
+        "options": 10
+      },
+      "03h86i3n2frsco78qkrkzdofr": {
+        "id": "03h86i3n2frsco78qkrkzdofr",
+        "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+        "name": "name",
+        "dataType": "VARCHAR",
+        "options": 8
+      },
+      "03h86i4vhsrgk2c82er9jdgx5": {
+        "id": "03h86i4vhsrgk2c82er9jdgx5",
+        "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+        "name": "description",
+        "dataType": "TEXT",
+        "options": 8
+      },
+      "03h86i6l0yua75ma0iu28y39u": {
+        "id": "03h86i6l0yua75ma0iu28y39u",
+        "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+        "name": "params",
+        "dataType": "JSON",
+        "options": 8
+      },
+      "03h86i7pauyo798dn94ijlxor": {
+        "id": "03h86i7pauyo798dn94ijlxor",
+        "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+        "name": "is_active",
+        "dataType": "BOOL",
+        "default": "true",
+        "options": 8
+      },
+      "03h86i9m5kna7zf40hygwkg7l": {
+        "id": "03h86i9m5kna7zf40hygwkg7l",
+        "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+        "name": "block_type_id",
+        "dataType": "INT",
+        "options": 8
+      },
+      "03h86iacx2siyd81cej0ypaug": {
+        "id": "03h86iacx2siyd81cej0ypaug",
+        "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+        "name": "page_id",
+        "dataType": "INT",
+        "options": 8
+      },
+      "03h86jduuj9lmfemwr1g9f8ky": {
+        "id": "03h86jduuj9lmfemwr1g9f8ky",
+        "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+        "name": "sort_order",
+        "dataType": "INT",
+        "default": "1",
+        "options": 8
       }
     },
     "relationshipEntities": {
@@ -362,6 +510,42 @@
           "tableId": "03h82tntik3j2uz7yjqvqi01o",
           "columnIds": [
             "03h82wzkqqy2m0c0q2bwhqnbx"
+          ]
+        }
+      },
+      "03h86i9m610n3slm9zklcrdxp": {
+        "id": "03h86i9m610n3slm9zklcrdxp",
+        "relationshipType": 16,
+        "onDelete": 1,
+        "onUpdate": 1,
+        "start": {
+          "tableId": "03h86hk8059y3bnx7qa4naw83",
+          "columnIds": [
+            "03h86hn0qrqpsomawee6djfrm"
+          ]
+        },
+        "end": {
+          "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+          "columnIds": [
+            "03h86i9m5kna7zf40hygwkg7l"
+          ]
+        }
+      },
+      "03h86iacx2siyd81cemhuvlgo": {
+        "id": "03h86iacx2siyd81cemhuvlgo",
+        "relationshipType": 16,
+        "onDelete": 1,
+        "onUpdate": 1,
+        "start": {
+          "tableId": "03h82tntik3j2uz7yjqvqi01o",
+          "columnIds": [
+            "03h82tqd8kosfmw5zdiuvi6vh"
+          ]
+        },
+        "end": {
+          "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+          "columnIds": [
+            "03h86iacx2siyd81cej0ypaug"
           ]
         }
       }
