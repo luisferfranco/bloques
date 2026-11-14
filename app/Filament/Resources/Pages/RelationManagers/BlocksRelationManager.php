@@ -19,73 +19,74 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\ToggleColumn;
 
 class BlocksRelationManager extends RelationManager
 {
-    protected static string $relationship = 'blocks';
+  protected static string $relationship = 'blocks';
 
-    public function form(Schema $schema): Schema
-    {
-        return $schema
-            ->components([
-                Select::make('block_type_id')
-                    ->relationship('blockType', 'name')
-                    ->required(),
-                TextInput::make('name')
-                    ->required(),
-                Textarea::make('description')
-                    ->columnSpanFull(),
-                Textarea::make('params')
-                    ->columnSpanFull(),
-                Toggle::make('is_active')
-                    ->required(),
-                TextInput::make('sort_order')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-            ]);
-    }
+  public function form(Schema $schema): Schema
+  {
+    return $schema
+      ->components([
+        Select::make('block_type_id')
+          ->relationship('blockType', 'name')
+          ->required(),
+        TextInput::make('name')
+          ->required(),
+        Textarea::make('description')
+          ->columnSpanFull(),
+        Textarea::make('params')
+          ->columnSpanFull(),
+        Toggle::make('is_active')
+          ->required(),
+        TextInput::make('sort_order')
+          ->required()
+          ->numeric()
+          ->default(0),
+      ]);
+  }
 
-    public function table(Table $table): Table
-    {
-        return $table
-            ->recordTitleAttribute('id')
-            ->columns([
-                TextColumn::make('blockType.name')
-                    ->searchable(),
-                TextColumn::make('name')
-                    ->searchable(),
-                IconColumn::make('is_active')
-                    ->boolean(),
-                TextColumn::make('sort_order')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->headerActions([
-                CreateAction::make(),
-                AssociateAction::make(),
-            ])
-            ->recordActions([
-                EditAction::make(),
-                DissociateAction::make(),
-                DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DissociateBulkAction::make(),
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
+  public function table(Table $table): Table
+  {
+    return $table
+      ->reorderable('sort_order')
+      ->recordTitleAttribute('id')
+      ->columns([
+        TextColumn::make('blockType.name')
+          ->label('Tipo de Bloque')
+          ->searchable(),
+        TextColumn::make('name')
+          ->label('Nombre')
+          ->searchable(),
+        ToggleColumn::make('is_active')
+          ->label('Activo'),
+        TextColumn::make('created_at')
+          ->dateTime()
+          ->sortable()
+          ->toggleable(isToggledHiddenByDefault: true),
+        TextColumn::make('updated_at')
+          ->dateTime()
+          ->sortable()
+          ->toggleable(isToggledHiddenByDefault: true),
+      ])
+      ->filters([
+        //
+      ])
+      ->headerActions([
+        CreateAction::make(),
+        AssociateAction::make(),
+      ])
+      ->recordActions([
+        EditAction::make(),
+        DissociateAction::make(),
+        DeleteAction::make(),
+      ])
+      ->toolbarActions([
+        BulkActionGroup::make([
+          DissociateBulkAction::make(),
+          DeleteBulkAction::make(),
+        ]),
+      ]);
+  }
 }
