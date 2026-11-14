@@ -20,6 +20,10 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Actions\Action;
+use App\Models\Block;
+use App\Filament\Pages\Blocks\Hero;
+use App\Filament\Pages\Blocks\MissionVision;
 
 class BlocksRelationManager extends RelationManager
 {
@@ -78,9 +82,25 @@ class BlocksRelationManager extends RelationManager
         AssociateAction::make(),
       ])
       ->recordActions([
-        EditAction::make(),
-        DissociateAction::make(),
-        DeleteAction::make(),
+        EditAction::make()
+          ->iconButton(),
+        DissociateAction::make()
+          ->iconButton(),
+        DeleteAction::make()
+          ->iconButton(),
+        Action::make('config')
+          ->iconButton()
+          ->icon('heroicon-o-cog-8-tooth')
+          ->tooltip('Configurar Bloque')
+          ->url(fn (Block $record): string => match($record->blockType->slug) {
+            'hero' => Hero::getUrl([
+              'block' => $record->getKey(),
+            ]),
+            'mission-vision' => MissionVision::getUrl([
+              'block' => $record->getKey(),
+            ]),
+            default => '#',
+          })
       ])
       ->toolbarActions([
         BulkActionGroup::make([
