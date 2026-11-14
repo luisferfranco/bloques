@@ -24,4 +24,7 @@ class Tenant extends Model
   public function pages(): HasMany {
     return $this->hasMany(Page::class);
   }
+  public function services(): HasMany {
+    return $this->hasMany(Service::class);
+  }
 }
