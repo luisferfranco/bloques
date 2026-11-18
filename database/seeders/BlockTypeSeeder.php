@@ -34,6 +34,14 @@ class BlockTypeSeeder extends Seeder
         'is_active' => true,
         'is_premium' => false,
       ],
+      [
+        'name' => 'Servicios',
+        'slug' => 'services',
+        'description' => 'Sección para mostrar los servicios ofrecidos.',
+        'component' => 'blocks.services',
+        'is_active' => true,
+        'is_premium' => false,
+      ],
     ];
 
     foreach ($types as $type) {
