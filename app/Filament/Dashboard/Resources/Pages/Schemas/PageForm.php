@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Pages\Schemas;
+namespace App\Filament\Dashboard\Resources\Pages\Schemas;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;

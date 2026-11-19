@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use App\Models\PageType;
 use App\Models\Tenant;
+use Illuminate\Database\Seeder;
 
 class TenantSeeder extends Seeder
 {
@@ -19,6 +19,24 @@ class TenantSeeder extends Seeder
       'name' => 'Default Tenant',
     ]);
 
-    $tenant->users()->attach(1);
+    $tenant->users()->attach(1, ['is_owner' => true]);
+
+    $initialPages = ['inicio', 'nosotros', 'servicios', 'contacto'];
+    foreach ($initialPages as $index => $page) {
+      $pageType = PageType::where('slug', $page)
+        ->first();
+
+      $tenant->pages()->create([
+        'page_type_id'  => $pageType->id,
+        'name'          => $pageType->name,
+        'slug'          => $pageType->slug,
+        'description'   => $pageType->description,
+        'is_active'     => true,
+        'is_system'     => true,
+        'sort_order'    => $index+1,
+      ]);
+    }
+
+
   }
 }

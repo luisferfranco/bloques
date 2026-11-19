@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Pages\RelationManagers;
+namespace App\Filament\Dashboard\Resources\Pages\RelationManagers;
 
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
@@ -16,14 +16,13 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Actions\Action;
 use App\Models\Block;
-use App\Filament\Pages\Blocks\Hero;
-use App\Filament\Pages\Blocks\MissionVision;
+use App\Filament\Dashboard\Pages\Blocks\Hero;
+use App\Filament\Dashboard\Pages\Blocks\MissionVision;
 
 class BlocksRelationManager extends RelationManager
 {

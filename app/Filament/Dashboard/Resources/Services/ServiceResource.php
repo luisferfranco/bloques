@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\Services;
+namespace App\Filament\Dashboard\Resources\Services;
 
-use App\Filament\Resources\Services\Pages\CreateService;
-use App\Filament\Resources\Services\Pages\EditService;
-use App\Filament\Resources\Services\Pages\ListServices;
-use App\Filament\Resources\Services\Schemas\ServiceForm;
-use App\Filament\Resources\Services\Tables\ServicesTable;
+use App\Filament\Dashboard\Resources\Services\Pages\CreateService;
+use App\Filament\Dashboard\Resources\Services\Pages\EditService;
+use App\Filament\Dashboard\Resources\Services\Pages\ListServices;
+use App\Filament\Dashboard\Resources\Services\Schemas\ServiceForm;
+use App\Filament\Dashboard\Resources\Services\Tables\ServicesTable;
 use App\Models\Service;
 use BackedEnum;
 use Filament\Resources\Resource;

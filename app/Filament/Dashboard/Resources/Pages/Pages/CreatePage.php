@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Pages\Pages;
+namespace App\Filament\Dashboard\Resources\Pages\Pages;
 
-use App\Filament\Resources\Pages\PageResource;
+use App\Filament\Dashboard\Resources\Pages\PageResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreatePage extends CreateRecord

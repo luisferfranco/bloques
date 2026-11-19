@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages\Blocks;
+namespace App\Filament\Dashboard\Pages\Blocks;
 
 use App\Models\Block;
 use Filament\Actions\Action;
