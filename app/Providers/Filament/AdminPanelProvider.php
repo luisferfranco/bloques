@@ -32,11 +32,6 @@ class AdminPanelProvider extends PanelProvider
       ->path('admin')
       ->spa()
       ->login()
-      ->tenant(
-        Tenant::class,
-        slugAttribute: 'slug',
-      )
-      ->tenantRegistration(CreateTenant::class)
       ->databaseNotifications(position: DatabaseNotificationsPosition::Sidebar)
       ->colors([
         'primary' => Color::Amber,
