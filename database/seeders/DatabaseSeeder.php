@@ -8,6 +8,7 @@ use Database\Seeders\TenantSeeder;
 use Database\Seeders\PageTypeSeeder;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
   use WithoutModelEvents;
@@ -17,9 +18,10 @@ class DatabaseSeeder extends Seeder
    */
   public function run(): void
   {
-    User::factory()->create([
-      'name'  => 'Luis F. Franco',
-      'email' => 'luisferfranco@gmail.com',
+    $user = User::firstOrCreate([
+      'name'      => 'Luis F. Franco',
+      'email'     => 'luisferfranco@gmail.com',
+      'password'  => bcrypt('password'),
     ]);
 
     $this->call([
@@ -30,6 +32,9 @@ class DatabaseSeeder extends Seeder
       ThemeSeeder::class,
       ThemeVersionSeeder::class,
       TenantThemeSeeder::class,
+      RoleSeeder::class,
     ]);
+
+    $user->assignRole('SUPER_ADMIN');
   }
 }
