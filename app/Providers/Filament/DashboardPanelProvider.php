@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Dashboard\Pages\CreateTenant;
+use App\Models\Tenant;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -26,11 +28,24 @@ class DashboardPanelProvider extends PanelProvider
     return $panel
       ->id('dashboard')
       ->path('dashboard')
+      ->login()
+      ->spa()
+      ->tenant(
+        Tenant::class,
+        slugAttribute: 'slug',
+      )
+      ->tenantRegistration(CreateTenant::class)
       ->colors([
         'primary' => Color::Amber,
       ])
-      ->discoverResources(in: app_path('Filament/Dashboard/Resources'), for: 'App\Filament\Dashboard\Resources')
-      ->discoverPages(in: app_path('Filament/Dashboard/Pages'), for: 'App\Filament\Dashboard\Pages')
+      ->discoverResources(
+        in: app_path('Filament/Dashboard/Resources'),
+        for: 'App\Filament\Dashboard\Resources'
+      )
+      ->discoverPages(
+        in: app_path('Filament/Dashboard/Pages'),
+        for: 'App\Filament\Dashboard\Pages'
+      )
       ->pages([
         Dashboard::class,
       ])

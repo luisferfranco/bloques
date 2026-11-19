@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Dashboard\Pages;
 
 use App\Models\PageType;
 use App\Models\Tenant;
@@ -47,7 +47,9 @@ class CreateTenant extends RegisterTenant
       ]);
 
       // 2. Asociar usuario autenticado
-      $tenant->users()->attach(auth()->id());
+      $tenant->users()->attach(auth()->id(), [
+          'is_owner' => true,
+      ]);
 
       // 3. Obtener los cuatro tipos de página
       $initialPages = ['inicio', 'nosotros', 'servicios', 'contacto'];
