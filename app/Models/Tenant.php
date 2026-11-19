@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Guarded([])]
 class Tenant extends Model
@@ -26,5 +27,8 @@ class Tenant extends Model
   }
   public function services(): HasMany {
     return $this->hasMany(Service::class);
+  }
+  public function themeVersion(): BelongsTo {
+    return $this->belongsTo(ThemeVersion::class);
   }
 }

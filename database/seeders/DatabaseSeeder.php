@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
       TenantSeeder::class,
       PageTypeSeeder::class,
       BlockTypeSeeder::class,
+      DesignTokenSchemaSeeder::class,
+      ThemeSeeder::class,
+      ThemeVersionSeeder::class,
+      TenantThemeSeeder::class,
     ]);
   }
 }
