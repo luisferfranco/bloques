@@ -3,7 +3,9 @@
 namespace App\Filament\Dashboard\Pages\Blocks;
 
 use App\Models\Block;
+use App\Models\BlockType;
 use Filament\Actions\Action;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -12,6 +14,7 @@ use Filament\Schemas\Components\Callout;
 use Filament\Schemas\Components\EmbeddedSchema;
 use Filament\Schemas\Components\Form;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
 
 class MissionVision extends Page
 {
@@ -27,7 +30,7 @@ class MissionVision extends Page
     $this->blockId = (int) request()->query('block');
     abort_if($this->blockId <= 0, 404);
 
-    $block = Block::findOrFail($this->blockId);
+    $block = $this->getBlock();
 
     $params = is_string($block->params)
       ? (json_decode($block->params, true) ?? [])
@@ -38,6 +41,28 @@ class MissionVision extends Page
       'mission' => $params['mission'] ?? null,
       'vision'  => $params['vision'] ?? null,
     ]);
+  }
+
+  protected function getBlock(): Block
+  {
+    $tenant = Filament::getTenant();
+
+    abort_unless($tenant, 404);
+
+    $bt = BlockType::query()
+      ->where('slug', 'mission-vision')
+      ->firstOrFail();
+
+    return Block::query()
+      ->whereKey($this->blockId)
+      ->where('block_type_id', $bt->getKey())
+      ->whereHas(
+        'page.tenant',
+        fn (Builder $query) => $query->whereKey(
+          $tenant->getKey()
+        )
+      )
+      ->firstOrFail();
   }
 
   public function form(Schema $schema): Schema
