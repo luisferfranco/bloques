@@ -18,8 +18,10 @@ class Tenant extends Model
     ];
   }
 
-  public function users(): BelongsToMany {
+  public function users(): BelongsToMany
+  {
     return $this->belongsToMany(User::class)
+      ->withPivot('is_owner')
       ->withTimestamps();
   }
   public function pages(): HasMany {
