@@ -108,13 +108,13 @@
         "name": "tenants",
         "columnIds": [
           "03h82wnv4u2062vzq40yyw70g",
+          "03h9fnymt7r2yqheptw1bc778",
           "03h82woq2466ezisioakusfjg",
           "03h82wprizqz9u65q6316kqwp",
           "03h82wr54qicm9noliz07p4lv",
           "03h9fnl4r0t0d8gug6p86vp48",
           "03h9fnm2o5i2jftn9tvgkzb9j",
-          "03h9fnnl2ateheez8a5q0gnqa",
-          "03h9fnymt7r2yqheptw1bc778"
+          "03h9fnnl2ateheez8a5q0gnqa"
         ],
         "ui": {
           "x": 808,
@@ -146,8 +146,8 @@
           "03h86hx2emqgpvsdqus69w49g"
         ],
         "ui": {
-          "x": 702,
-          "y": 765
+          "x": 207.7141,
+          "y": 1049.2855
         }
       },
       "03h86hzm9iebd0gjk1lk7yo0z": {
@@ -181,8 +181,8 @@
           "03h8e4n5deoh6zyffne9u8pad"
         ],
         "ui": {
-          "x": 1310.6313,
-          "y": 659.8945
+          "x": 823.4885,
+          "y": 725.6087
         }
       },
       "03h9fm096ncqeledac394tmyc": {
@@ -198,7 +198,7 @@
           "03h9fvkuo4zdh2ra8x022j4et"
         ],
         "ui": {
-          "x": 1296.99,
+          "x": 1216.9898,
           "y": -44.4304
         }
       },
@@ -215,8 +215,8 @@
           "03h9fn9ieoetbrtcumzt5ars6"
         ],
         "ui": {
-          "x": 1760.1479,
-          "y": 97.6744
+          "x": 1317.2908,
+          "y": 226.246
         }
       },
       "03h9fv6nnr2sedxubufx6lqht": {
@@ -231,8 +231,8 @@
           "03h9fvej8ubzd0jaoh4ymvrz8"
         ],
         "ui": {
-          "x": 1598.3062,
-          "y": 445.0423
+          "x": 1649.7356,
+          "y": -34.958
         }
       }
     },

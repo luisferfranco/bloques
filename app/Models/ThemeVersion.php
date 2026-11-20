@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Theme;
+use App\Actions\ThemeVersions\ValidateThemeVersionTokens;
 use App\Models\DesignTokenSchema;
 use App\Models\Tenant;
+use App\Models\Theme;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,4 +32,12 @@ class ThemeVersion extends Model
   public function tenant(): HasMany {
     return $this->hasMany(Tenant::class);
   }
+
+  // Se ejecuta antes de guardar el modelo para validar los tokens del tema.
+  protected static function booted(): void {
+    static::saving(function (ThemeVersion $themeVersion): void {
+      app(ValidateThemeVersionTokens::class)->handle($themeVersion);
+    });
+  }
+
 }
