@@ -22,16 +22,13 @@ class ThemeVersion extends Model
     ];
   }
 
-  public function theme(): BelongsTo
-  {
+  public function theme(): BelongsTo {
     return $this->belongsTo(Theme::class);
   }
-  public function designTokenSchema(): BelongsTo
-  {
+  public function designTokenSchema(): BelongsTo {
     return $this->belongsTo(DesignTokenSchema::class);
   }
-  public function tenant(): HasMany
-  {
+  public function tenant(): HasMany {
     return $this->hasMany(Tenant::class);
   }
 }

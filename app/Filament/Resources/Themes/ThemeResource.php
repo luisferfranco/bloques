@@ -5,14 +5,15 @@ namespace App\Filament\Resources\Themes;
 use App\Filament\Resources\Themes\Pages\CreateTheme;
 use App\Filament\Resources\Themes\Pages\EditTheme;
 use App\Filament\Resources\Themes\Pages\ListThemes;
+use App\Filament\Resources\Themes\RelationManagers\VersionsRelationManager;
 use App\Filament\Resources\Themes\Schemas\ThemeForm;
 use App\Filament\Resources\Themes\Tables\ThemesTable;
 use App\Models\Theme;
 use BackedEnum;
-use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class ThemeResource extends Resource
 {
@@ -38,7 +39,7 @@ class ThemeResource extends Resource
   public static function getRelations(): array
   {
     return [
-      //
+      VersionsRelationManager::class,
     ];
   }
 

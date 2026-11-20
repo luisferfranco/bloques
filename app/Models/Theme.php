@@ -15,4 +15,7 @@ class Theme extends Model
       'is_premium' => 'boolean',
     ];
   }
+  public function versions() {
+    return $this->hasMany(ThemeVersion::class);
+  }
 }
