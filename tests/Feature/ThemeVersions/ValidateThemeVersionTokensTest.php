@@ -2,8 +2,12 @@
 
 use App\Actions\ThemeVersions\ValidateThemeVersionTokens;
 use App\Models\DesignTokenSchema;
+use App\Models\Theme;
 use App\Models\ThemeVersion;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Validation\ValidationException;
+
+uses(RefreshDatabase::class);
 
 beforeEach(function () {
   $this->makeVersion = function (array $contract, array $values): ThemeVersion {
@@ -108,4 +112,60 @@ it('rejects values with an incompatible type', function () {
 
   expect(fn () => $this->validator->handle($version))
     ->toThrow(ValidationException::class);
+});
+
+function createThemeVersionForTest(array $tokens): ThemeVersion
+{
+  $theme = Theme::forceCreate([
+    'name' => 'Tema de prueba',
+    'slug' => 'tema-prueba',
+  ]);
+
+  $schema = DesignTokenSchema::forceCreate([
+    'name' => 'default',
+    'version' => '1.0.0',
+    'definition' => [
+      'tokens' => [
+        'primary' => [
+          'type' => 'color',
+          'required' => true,
+        ],
+      ],
+    ],
+    'is_active' => true,
+    'published_at' => now(),
+  ]);
+
+  return new ThemeVersion([
+    'theme_id' => $theme->id,
+    'design_token_schema_id' => $schema->id,
+    'version' => '1.0.0',
+    'tokens' => $tokens,
+  ]);
+}
+
+it('prevents saving a theme version with invalid tokens', function () {
+  $version = createThemeVersionForTest([
+    'primary' => 'blue',
+  ]);
+
+  expect(fn () => $version->save())
+    ->toThrow(ValidationException::class);
+
+  $this->assertDatabaseMissing('theme_versions', [
+    'version' => '1.0.0',
+  ]);
+});
+
+it('saves a theme version with valid tokens', function () {
+  $version = createThemeVersionForTest([
+    'primary' => '#2563eb',
+  ]);
+
+  expect($version->save())->toBeTrue();
+
+  $this->assertDatabaseHas('theme_versions', [
+    'id' => $version->id,
+    'version' => '1.0.0',
+  ]);
 });
