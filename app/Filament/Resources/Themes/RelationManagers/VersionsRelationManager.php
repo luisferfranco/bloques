@@ -9,15 +9,17 @@ use Filament\Tables\Table;
 
 class VersionsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'versions';
+  protected static string $relationship = 'versions';
 
-    protected static ?string $relatedResource = ThemeVersionResource::class;
+  protected static ?string $relatedResource = ThemeVersionResource::class;
 
-    public function table(Table $table): Table
-    {
-        return $table
-            ->headerActions([
-                CreateAction::make(),
-            ]);
-    }
+  public function table(Table $table): Table
+  {
+    return $table
+      ->headerActions([
+        CreateAction::make()
+          ->label('Nuevo Tema')
+          ->icon('lucide-palette'),
+      ]);
+  }
 }
