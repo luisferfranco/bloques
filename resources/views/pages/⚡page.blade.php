@@ -1,18 +1,26 @@
 <?php
 
-use Livewire\Component;
-use App\Models\Tenant;
 use App\Models\Page;
+use App\Models\Tenant;
+use App\Models\ThemeVersion;
+use Livewire\Component;
 
 new class extends Component
 {
   public Tenant $tenant;
   public Page $page;
+  public ThemeVersion $themeVersion;
   public $blocks;
+  public array $themeTokens = [];
 
   public function mount(Tenant $tenant, ?string $page = null):void
   {
-    $this->tenant = $tenant;
+    $this->tenant = $tenant->load('themeVersion');
+    $this->themeVersion = $this->tenant->themeVersion
+      ?? abort(404, 'El tenant no tiene un tema asignado');
+
+    $this->themeTokens = $this->tenant->themeVersion->tokens ?? [];
+
     $this->page = $page
       ? $tenant->pages()
         ->where('slug', $page)
@@ -22,20 +30,20 @@ new class extends Component
         ->where('is_active', true)
         ->firstOrFail();
 
-    logger()->debug('Page loaded', ['page' => $this->page]);
-
     $this->blocks = $this->page->blocks()
       ->where('is_active', true)
-      ->with('BlockType')
+      ->with('blockType')
       ->orderBy('sort_order')
       ->get();
-
-    logger()->debug('Blocks loaded', ['blocks' => $this->blocks]);
   }
 };
 ?>
 
-<div>
+<div
+  style="{{ collect($themeTokens)
+    ->map(fn ($value, $key) => "--{$key}: {$value}")
+    ->implode('; ') }}"
+  >
   @foreach ($this->blocks as $block)
     <livewire:dynamic-component
       :is="$block->blockType->component"

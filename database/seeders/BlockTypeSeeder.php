@@ -22,7 +22,7 @@ class BlockTypeSeeder extends Seeder
         'name' => 'Misión y Visión',
         'slug' => 'mission-vision',
         'description' => 'Sección para presentar la misión y visión.',
-        'component' => 'blocks.mision-vision',
+        'component' => 'blocks.mission-vision',
         'is_active' => true,
         'is_premium' => false,
       ],

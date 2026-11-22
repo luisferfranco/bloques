@@ -16,14 +16,16 @@ new class extends Component
 };
 ?>
 
-<section class="relative isolate flex min-h-56 w-full items-center overflow-hidden bg-indigo-600 px-6 py-12 text-white">
-
+<section
+  class="relative flex items-center w-full px-6 py-12 overflow-hidden isolate min-h-162"
+  style="background-color: var(--background); color: var(--foreground);"
+>
   {{-- Imagen de fondo --}}
   @if ($params->background_image ?? false)
     <img
       src="{{ Storage::disk('public')->url($params->background_image) }}"
       alt=""
-      class="absolute inset-0 -z-10 h-full w-full object-cover"
+      class="absolute inset-0 object-cover w-full h-full -z-10"
       style="object-position: {{ $params->image_position ?? 'center' }};"
     >
   @endif
@@ -55,7 +57,7 @@ new class extends Component
     @endif
 
     @if ($params->description ?? false)
-      <p class="mx-auto mt-5 max-w-3xl text-base leading-relaxed sm:text-lg">
+      <p class="max-w-3xl mx-auto mt-5 text-base leading-relaxed sm:text-lg">
         {{ $params->description }}
       </p>
     @endif
@@ -72,11 +74,23 @@ new class extends Component
         <a
           href="{{ $params->button_url }}"
           @class([
-            'inline-flex items-center rounded-lg px-6 py-3 font-semibold transition',
-            'bg-white text-indigo-700 hover:bg-gray-100' => ($params->button_style ?? 'primary') === 'primary',
-            'bg-gray-900 text-white hover:bg-gray-800' => ($params->button_style ?? 'primary') === 'secondary',
-            'border-2 border-white text-white hover:bg-white hover:text-indigo-700' => ($params->button_style ?? 'primary') === 'outline',
-            'text-white underline underline-offset-4 hover:text-gray-200' => ($params->button_style ?? 'primary') === 'link',
+            'inline-flex items-center px-6 py-3 font-semibold transition',
+            'hover:opacity-90' => in_array(
+              $params->button_style ?? 'primary',
+              ['primary', 'secondary']
+            ),
+            'underline underline-offset-4 hover:opacity-80' =>
+              ($params->button_style ?? 'primary') === 'link',
+          ])
+          @style([
+            'background-color: var(--primary); color: var(--primary-foreground); border-radius: var(--button-radius);' =>
+              ($params->button_style ?? 'primary') === 'primary',
+            'background-color: var(--secondary); color: var(--secondary-foreground); border-radius: var(--button-radius);' =>
+              ($params->button_style ?? 'primary') === 'secondary',
+            'background-color: transparent; color: var(--primary); border: 2px solid var(--primary); border-radius: var(--button-radius);' =>
+              ($params->button_style ?? 'primary') === 'outline',
+            'background-color: transparent; color: var(--primary);' =>
+              ($params->button_style ?? 'primary') === 'link',
           ])
         >
           {{ $params->button_text }}
@@ -84,6 +98,4 @@ new class extends Component
       </div>
     @endif
   </div>
-
-
 </section>

@@ -20,13 +20,14 @@ class DatabaseSeeder extends Seeder
   {
     $user = User::firstOrCreate([
       'name'      => 'Luis F. Franco',
+    ], [
       'email'     => 'luisferfranco@gmail.com',
       'password'  => bcrypt('password'),
     ]);
 
     $this->call([
-      TenantSeeder::class,
       PageTypeSeeder::class,
+      TenantSeeder::class,
       BlockTypeSeeder::class,
       DesignTokenSchemaSeeder::class,
       ThemeSeeder::class,
