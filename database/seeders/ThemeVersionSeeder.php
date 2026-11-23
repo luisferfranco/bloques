@@ -44,11 +44,6 @@ class ThemeVersionSeeder extends Seeder
       'surface-overlay' => '#ffffff',
       'surface-inverted' => '#0f172a',
 
-      // Typography
-      'font-heading' => 'Inter, sans-serif',
-      'font-body' => 'Inter, sans-serif',
-      'font-mono' => 'monospace',
-
       // Shapes
       'radius-none' => '0',
       'radius-sm' => '0.25rem',

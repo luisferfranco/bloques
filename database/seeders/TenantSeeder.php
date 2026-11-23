@@ -13,23 +13,32 @@ class TenantSeeder extends Seeder
    */
   public function run(): void
   {
-    $tenant = Tenant::firstOrCreate([
-      'slug' => 'default-tenant',
+    $tenant = Tenant::updateOrCreate([
+      'slug'          => 'default-tenant',
     ], [
-      'name' => 'Default Tenant',
+      'name'          => 'Default Tenant',
+      'settings'      => [
+        'typography'  => [
+          'heading'   => 'inter',
+          'body'      => 'inter',
+          'mono'      => 'inter'
+      ]],
     ]);
 
-    $tenant->users()->attach(1, ['is_owner' => true]);
+    if (!$tenant->users()->where('user_id', 1)->exists()) {
+      $tenant->users()->attach(1, ['is_owner' => true]);
+    }
 
     $initialPages = ['inicio', 'nosotros', 'servicios', 'contacto'];
     foreach ($initialPages as $index => $page) {
       $pageType = PageType::where('slug', $page)
         ->first();
 
-      $tenant->pages()->create([
+      $tenant->pages()->updateOrCreate([
+        'slug'          => $pageType->slug,
+      ], [
         'page_type_id'  => $pageType->id,
         'name'          => $pageType->name,
-        'slug'          => $pageType->slug,
         'description'   => $pageType->description,
         'is_active'     => true,
         'is_system'     => true,

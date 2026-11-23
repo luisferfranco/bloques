@@ -41,16 +41,17 @@ new class extends Component
 
   private function resolveThemeFonts(): void
   {
-    $fontTokens = [
-      'font-heading' => 'display',
-      'font-body' => 'text',
-      'font-mono' => 'mono',
+    $fontCategories = [
+      'heading' => 'display',
+      'body' => 'text',
+      'mono' => 'mono',
     ];
 
     $families = [];
+    $typography = $this->tenant->settings['typography'] ?? [];
 
-    foreach ($fontTokens as $token => $category) {
-      $fontId = $this->themeTokens[$token] ?? null;
+    foreach ($fontCategories as $key => $category) {
+      $fontId = $typography[$key] ?? null;
 
       $font = config("theme-fonts.{$category}.{$fontId}");
 
@@ -60,14 +61,10 @@ new class extends Component
 
       $families[$font['family']] = $font;
 
-      $this->themeTokens[$token] = sprintf(
+      $this->themeTokens["font-{$key}"] = sprintf(
         '"%s", %s',
         $font['family'],
-        match ($category) {
-          'display' => 'sans-serif',
-          'text' => 'sans-serif',
-          'mono' => 'monospace',
-        },
+        $category === 'mono' ? 'monospace' : 'sans-serif',
       );
     }
 

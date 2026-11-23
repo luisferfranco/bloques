@@ -15,6 +15,7 @@ class Tenant extends Model
   {
     return [
       'is_active' => 'boolean',
+      'settings' => 'array',
     ];
   }
 

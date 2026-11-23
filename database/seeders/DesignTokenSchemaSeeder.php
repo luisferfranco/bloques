@@ -37,11 +37,6 @@ class DesignTokenSchemaSeeder extends Seeder
         'surface-overlay' => ['type' => 'color', 'required' => true],
         'surface-inverted' => ['type' => 'color', 'required' => true],
 
-        // Typography
-        'font-heading' => ['type' => 'font-family', 'required' => true],
-        'font-body' => ['type' => 'font-family', 'required' => true],
-        'font-mono' => ['type' => 'font-family', 'required' => true],
-
         // Shapes
         'radius-none' => ['type' => 'length', 'required' => true],
         'radius-sm' => ['type' => 'length', 'required' => true],

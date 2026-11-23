@@ -7,6 +7,11 @@ return [
       'family' => 'Oswald',
       'weights' => [400, 500, 600, 700],
     ],
+    'inter' => [
+      'name' => 'Inter',
+      'family' => 'Inter',
+      'weights' => [400, 500, 600, 700],
+    ],
     'anton' => [
       'name' => 'Anton',
       'family' => 'Anton',
@@ -25,6 +30,11 @@ return [
   ],
 
   'text' => [
+    'inter' => [
+      'name' => 'Inter',
+      'family' => 'Inter',
+      'weights' => [400, 500, 600, 700],
+    ],
     'roboto' => [
       'name' => 'Roboto',
       'family' => 'Roboto',
@@ -48,6 +58,11 @@ return [
   ],
 
   'mono' => [
+    'inter' => [
+      'name' => 'Inter',
+      'family' => 'Inter',
+      'weights' => [400, 500, 600, 700],
+    ],
     'roboto-mono' => [
       'name' => 'Roboto Mono',
       'family' => 'Roboto Mono',
