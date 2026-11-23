@@ -12,7 +12,7 @@ new class extends Component
   public ThemeVersion $themeVersion;
   public $blocks;
   public array $themeTokens = [];
-  public string $googleFontsUrl = '';
+  public $googleFontsUrl = '';
 
   public function mount(Tenant $tenant, ?string $page = null):void
   {
@@ -41,6 +41,20 @@ new class extends Component
 
   private function resolveThemeFonts(): void
   {
+    $this->googleFontsUrl = null;
+
+    $defaultPreset = config('theme-fonts.default', 'inter');
+    $presetId = $this->tenant->settings['typography']['preset'] ?? $defaultPreset;
+
+    logger()->info('Preset ID: ' . $presetId);
+
+    $preset = config("theme-fonts.presets.{$presetId}")
+      ?? config("theme-fonts.presets.{$defaultPreset}");
+
+    if (! $preset) {
+      return;
+    }
+
     $fontCategories = [
       'heading' => 'display',
       'body' => 'text',
@@ -48,10 +62,13 @@ new class extends Component
     ];
 
     $families = [];
-    $typography = $this->tenant->settings['typography'] ?? [];
 
     foreach ($fontCategories as $key => $category) {
-      $fontId = $typography[$key] ?? null;
+      $fontId = $preset[$key] ?? null;
+
+      if (! $fontId) {
+        continue;
+      }
 
       $font = config("theme-fonts.{$category}.{$fontId}");
 
@@ -85,6 +102,7 @@ new class extends Component
         . '&display=swap';
     }
   }
+
 };
 ?>
 

@@ -19,9 +19,7 @@ class TenantSeeder extends Seeder
       'name'          => 'Default Tenant',
       'settings'      => [
         'typography'  => [
-          'heading'   => 'inter',
-          'body'      => 'inter',
-          'mono'      => 'inter'
+          'preset'    => 'oswald-inter',
       ]],
     ]);
 
