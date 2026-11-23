@@ -11,7 +11,7 @@ new class extends Component
 
   public function mount(): void
   {
-    $tenant = $request->route('tenant');
+    $tenant = request()->route('tenant');
 
     app(CurrentTenant::class)->set($tenant);
     $this->services = Service::query()->get();

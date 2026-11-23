@@ -3,6 +3,7 @@
 use App\Models\Page;
 use App\Models\Tenant;
 use App\Models\ThemeVersion;
+use App\Support\CurrentTenant;
 use Livewire\Component;
 
 new class extends Component
@@ -17,6 +18,8 @@ new class extends Component
   public function mount(Tenant $tenant, ?string $page = null):void
   {
     $this->tenant = $tenant->load('themeVersion');
+    app(CurrentTenant::class)->set($this->tenant);
+
     $this->themeVersion = $this->tenant->themeVersion
       ?? abort(404, 'El tenant no tiene un tema asignado');
 
@@ -37,6 +40,11 @@ new class extends Component
       ->with('blockType')
       ->orderBy('sort_order')
       ->get();
+  }
+
+  public function hydrate(): void
+  {
+    app(CurrentTenant::class)->set($this->tenant);
   }
 
   private function resolveThemeFonts(): void

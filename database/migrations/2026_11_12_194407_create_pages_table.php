@@ -17,7 +17,7 @@ return new class extends Migration
       $table->foreignIdFor(\App\Models\PageType::class)->constrained()->onDelete('cascade');
       $table->foreignIdFor(\App\Models\Tenant::class)->constrained()->onDelete('cascade');
       $table->string('name');
-      $table->string('slug')->unique();
+      $table->string('slug');
       $table->text('description')->nullable();
       $table->boolean('is_active')->default(true);
       $table->boolean('is_system')->default(true);
