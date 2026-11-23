@@ -14,22 +14,38 @@ new class extends Component
 };
 ?>
 
-<div class="grid grid-cols-2 gap-4 bg-indigo-400 py-4 px-8 min-h-56">
+<section
+  class="mx-auto grid w-full max-w-[var(--container-width)] grid-cols-1 md:grid-cols-2 gap-6 py-8 px-4 md:px-8 text-(--foreground)"
+  style="font-family: var(--font-body)"
+  >
 
-  <div class="bg-gray-200 rounded-xl shadow-xl text-black w-full h-full py-4 px-8">
+  <article
+    class="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--background)] p-6 shadow-sm"
+    >
 
-    <h1 class="font-bold text-red-800 text-2xl">
+    <h2 class="text-2xl font-bold text-[var(--primary)] mb-4"
+      style="font-family: var(--font-heading)"
+      >
       Misión
-    </h1>
-    <p>{{ $params->mission ?? null }}</p>
-  </div>
+    </h2>
 
-  <div class="bg-gray-200 rounded-xl shadow-xl text-black w-full h-full py-4 px-8">
+    <p class="leading-relaxed">
+      {{ $params->mission ?? '' }}
+    </p>
+  </article>
 
-    <h1 class="font-bold text-red-800 text-2xl">
+  <article
+    class="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--background)] p-6 shadow-sm"
+    >
+
+    <h2 class="text-2xl font-bold text-[var(--primary)] mb-4"
+      style="font-family: var(--font-heading)"
+      >
       Visión
-    </h1>
-    <p>{{ $params->vision ?? null }}</p>
-  </div>
+    </h2>
 
-</div>
+    <p class="leading-relaxed">
+      {{ $params->vision ?? '' }}
+    </p>
+  </article>
+</section>
