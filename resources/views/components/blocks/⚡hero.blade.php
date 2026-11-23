@@ -18,8 +18,8 @@ new class extends Component
 
 <section
   class="relative flex items-center w-full px-6 py-12 overflow-hidden isolate min-h-162"
-  style="background-color: var(--background); color: var(--foreground); font-family: var(--font-body);"
->
+  style="background-color: var(--background); color: {{ $params->claro ? '#eeeeee' : 'var(--foreground)' }}; font-family: var(--font-body);"
+  >
   {{-- Imagen de fondo --}}
   @if ($params->background_image ?? false)
     <img
