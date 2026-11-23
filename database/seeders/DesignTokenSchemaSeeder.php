@@ -83,7 +83,7 @@ class DesignTokenSchemaSeeder extends Seeder
       ],
     ];
 
-    DesignTokenSchema::firstOrCreate(
+    DesignTokenSchema::updateOrCreate(
       [
         'name' => 'default',
         'version' => '1.0.0',

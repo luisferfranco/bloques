@@ -18,7 +18,7 @@ new class extends Component
 
 <section
   class="relative flex items-center w-full px-6 py-12 overflow-hidden isolate min-h-162"
-  style="background-color: var(--background); color: var(--foreground);"
+  style="background-color: var(--background); color: var(--foreground); font-family: var(--font-body);"
 >
   {{-- Imagen de fondo --}}
   @if ($params->background_image ?? false)
@@ -51,7 +51,10 @@ new class extends Component
     @endif
 
     @if ($params->title ?? false)
-      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+      <h1
+        style="font-family: var(--font-heading)"
+        class="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+        >
         {{ $params->title }}
       </h1>
     @endif

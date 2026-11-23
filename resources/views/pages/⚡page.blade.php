@@ -12,6 +12,7 @@ new class extends Component
   public ThemeVersion $themeVersion;
   public $blocks;
   public array $themeTokens = [];
+  public string $googleFontsUrl = '';
 
   public function mount(Tenant $tenant, ?string $page = null):void
   {
@@ -20,6 +21,7 @@ new class extends Component
       ?? abort(404, 'El tenant no tiene un tema asignado');
 
     $this->themeTokens = $this->tenant->themeVersion->tokens ?? [];
+    $this->resolveThemeFonts();
 
     $this->page = $page
       ? $tenant->pages()
@@ -35,6 +37,56 @@ new class extends Component
       ->with('blockType')
       ->orderBy('sort_order')
       ->get();
+  }
+
+  private function resolveThemeFonts(): void
+  {
+    $fontTokens = [
+      'font-heading' => 'display',
+      'font-body' => 'text',
+      'font-mono' => 'mono',
+    ];
+
+    $families = [];
+
+    foreach ($fontTokens as $token => $category) {
+      $fontId = $this->themeTokens[$token] ?? null;
+
+      $font = config("theme-fonts.{$category}.{$fontId}");
+
+      if (! $font) {
+        continue;
+      }
+
+      $families[$font['family']] = $font;
+
+      $this->themeTokens[$token] = sprintf(
+        '"%s", %s',
+        $font['family'],
+        match ($category) {
+          'display' => 'sans-serif',
+          'text' => 'sans-serif',
+          'mono' => 'monospace',
+        },
+      );
+    }
+
+    $queries = [];
+
+    foreach ($families as $font) {
+      $weights = implode(';', $font['weights']);
+
+      $queries[] = 'family='
+        . rawurlencode($font['family'])
+        . ':wght@'
+        . $weights;
+    }
+
+    if ($queries !== []) {
+      $this->googleFontsUrl = 'https://fonts.googleapis.com/css2?'
+        . implode('&', $queries)
+        . '&display=swap';
+    }
   }
 };
 ?>
@@ -52,3 +104,11 @@ new class extends Component
     />
   @endforeach
 </div>
+
+@assets
+  @if ($googleFontsUrl !== '')
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ $googleFontsUrl }}">
+  @endif
+@endassets
