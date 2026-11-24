@@ -28,7 +28,6 @@
   },
   "doc": {
     "tableIds": [
-      "03h82tcqm6cyekuw0ghlcvkru",
       "03h82tntik3j2uz7yjqvqi01o",
       "03h82wh3wtr45jw57a8uiua31",
       "03h82whevb5trwex5s5mlc87g",
@@ -43,7 +42,6 @@
       "03hak7gyh73oafw61je9fvytp"
     ],
     "relationshipIds": [
-      "03h82tx4ewuc064eukurm4aoa",
       "03h82wwywmpxa89hjbxmku4kr",
       "03h82wxkr0mx77kdiqlctylx4",
       "03h82wzkqwenxz1kxm2fh0pr6",
@@ -56,33 +54,19 @@
       "03hak76kjgd04offjhncp0kqt",
       "03hak7y3l9w3bxo3ufj1fk092",
       "03hak90j201r9dzbov35fih1l"
+    ],
+    "tableGroupIds": [
+      "03hao2c5o5jd4pqi38v8yppm3"
     ]
   },
   "collections": {
     "tableEntities": {
-      "03h82tcqm6cyekuw0ghlcvkru": {
-        "id": "03h82tcqm6cyekuw0ghlcvkru",
-        "name": "page_types",
-        "columnIds": [
-          "03h82teuyo2bwdoqjd1gt5agt",
-          "03h82uckntr3aufw8n6mjns0b",
-          "03h82tftocmmr0lr5qlzca21a",
-          "03h82tgflh3mynuatsyxqhasl",
-          "03h82thw1wo6tm1x8ov1stiio"
-        ],
-        "ui": {
-          "x": 64,
-          "y": 137.0002
-        }
-      },
       "03h82tntik3j2uz7yjqvqi01o": {
         "id": "03h82tntik3j2uz7yjqvqi01o",
         "name": "pages",
         "columnIds": [
           "03h82tqd8kosfmw5zdiuvi6vh",
-          "03h82tx4em1mrom3xam2i02lj",
           "03h82wzkqqy2m0c0q2bwhqnbx",
-          "03haj5lif2tcdgwq26zjvysej",
           "03h82trnh3nazwl6t8an2x4pl",
           "03h82tsg3am1x0fje8auiuvn5",
           "03h82tt4phf2ib0ko4boa9bcb",
@@ -117,14 +101,14 @@
           "03h9fnymt7r2yqheptw1bc778",
           "03h82woq2466ezisioakusfjg",
           "03h82wprizqz9u65q6316kqwp",
-          "03h82wr54qicm9noliz07p4lv",
           "03h9fnl4r0t0d8gug6p86vp48",
           "03h9fnm2o5i2jftn9tvgkzb9j",
-          "03h9fnnl2ateheez8a5q0gnqa"
+          "03h9fnnl2ateheez8a5q0gnqa",
+          "03h82wr54qicm9noliz07p4lv"
         ],
         "ui": {
-          "x": 808,
-          "y": 382.0002
+          "x": 816.6333,
+          "y": 381.2807
         }
       },
       "03h82wuub0xe3qjcygfngka45": {
@@ -132,7 +116,8 @@
         "name": "tenant_user",
         "columnIds": [
           "03h82wwywh4ffr4jol09vcd85",
-          "03h82wxkqv8jfq6henj69qf2z"
+          "03h82wxkqv8jfq6henj69qf2z",
+          "03haoah0fvqf0u23p6m40azvt"
         ],
         "ui": {
           "x": 809,
@@ -196,15 +181,16 @@
         "columnIds": [
           "03h9fm1vc53is4a1usy2lh61p",
           "03h9fm289v7fzyg5t3b7y7rba",
-          "03h9fm2gfsnq6eyj7z6ffr4px",
+          "03hao283o8jkijbjadc6al2kt",
           "03h9fm5vot9k11djxxjjsc48x",
           "03h9fm6lnm1uwa5an5r67hx88",
           "03h9fmab3bj0v2wyaecybrh1h",
           "03h9fvkuo4zdh2ra8x022j4et"
         ],
+        "groupId": "03hao2c5o5jd4pqi38v8yppm3",
         "ui": {
-          "x": 1216.9898,
-          "y": -44.4304
+          "x": 1295.4063,
+          "y": -72.487
         }
       },
       "03h9fmstk6fwhnj9ermw293ph": {
@@ -219,9 +205,10 @@
           "03h9fmyy7d4xw6uns3ussm4r7",
           "03h9fn9ieoetbrtcumzt5ars6"
         ],
+        "groupId": "03hao2c5o5jd4pqi38v8yppm3",
         "ui": {
-          "x": 1317.2908,
-          "y": 226.246
+          "x": 1312.9745,
+          "y": 224.8072
         }
       },
       "03h9fv6nnr2sedxubufx6lqht": {
@@ -235,9 +222,10 @@
           "03h9fvdivm2rc3nbmte932ytl",
           "03h9fvej8ubzd0jaoh4ymvrz8"
         ],
+        "groupId": "03hao2c5o5jd4pqi38v8yppm3",
         "ui": {
-          "x": 1649.7356,
-          "y": -34.958
+          "x": 1696.4977,
+          "y": -73.8062
         }
       },
       "03hak6tlck5eyw4cc5zkdme01": {
@@ -278,42 +266,6 @@
       }
     },
     "tableColumnEntities": {
-      "03h82teuyo2bwdoqjd1gt5agt": {
-        "id": "03h82teuyo2bwdoqjd1gt5agt",
-        "tableId": "03h82tcqm6cyekuw0ghlcvkru",
-        "name": "id",
-        "dataType": "INT",
-        "options": 10
-      },
-      "03h82tftocmmr0lr5qlzca21a": {
-        "id": "03h82tftocmmr0lr5qlzca21a",
-        "tableId": "03h82tcqm6cyekuw0ghlcvkru",
-        "name": "name",
-        "dataType": "VARCHAR",
-        "options": 8
-      },
-      "03h82tgflh3mynuatsyxqhasl": {
-        "id": "03h82tgflh3mynuatsyxqhasl",
-        "tableId": "03h82tcqm6cyekuw0ghlcvkru",
-        "name": "description",
-        "dataType": "TEXT",
-        "options": 0
-      },
-      "03h82thw1wo6tm1x8ov1stiio": {
-        "id": "03h82thw1wo6tm1x8ov1stiio",
-        "tableId": "03h82tcqm6cyekuw0ghlcvkru",
-        "name": "is_active",
-        "dataType": "BOOL",
-        "default": "true",
-        "options": 8
-      },
-      "03h82uckntr3aufw8n6mjns0b": {
-        "id": "03h82uckntr3aufw8n6mjns0b",
-        "tableId": "03h82tcqm6cyekuw0ghlcvkru",
-        "name": "slug",
-        "dataType": "VARCHAR",
-        "options": 8
-      },
       "03h82tqd8kosfmw5zdiuvi6vh": {
         "id": "03h82tqd8kosfmw5zdiuvi6vh",
         "tableId": "03h82tntik3j2uz7yjqvqi01o",
@@ -357,13 +309,6 @@
         "dataType": "INT",
         "options": 0
       },
-      "03h82tx4em1mrom3xam2i02lj": {
-        "id": "03h82tx4em1mrom3xam2i02lj",
-        "tableId": "03h82tntik3j2uz7yjqvqi01o",
-        "name": "page_type_id",
-        "dataType": "INT",
-        "options": 8
-      },
       "03h82vt6eie6ojhwmv2k5vz7w": {
         "id": "03h82vt6eie6ojhwmv2k5vz7w",
         "tableId": "03h82tntik3j2uz7yjqvqi01o",
@@ -378,13 +323,6 @@
         "name": "tenant_id",
         "dataType": "INT",
         "options": 8
-      },
-      "03haj5lif2tcdgwq26zjvysej": {
-        "id": "03haj5lif2tcdgwq26zjvysej",
-        "tableId": "03h82tntik3j2uz7yjqvqi01o",
-        "name": "tarjetero_id",
-        "dataType": "INT",
-        "options": 0
       },
       "03h82wii0nbzx5qzr2qa6ce0d": {
         "id": "03h82wii0nbzx5qzr2qa6ce0d",
@@ -460,7 +398,7 @@
       "03h9fnnl2ateheez8a5q0gnqa": {
         "id": "03h9fnnl2ateheez8a5q0gnqa",
         "tableId": "03h82whevb5trwex5s5mlc87g",
-        "name": "brand_assets",
+        "name": "meta",
         "dataType": "JSON",
         "options": 0
       },
@@ -484,6 +422,13 @@
         "name": "tenant_id",
         "dataType": "INT",
         "options": 8
+      },
+      "03haoah0fvqf0u23p6m40azvt": {
+        "id": "03haoah0fvqf0u23p6m40azvt",
+        "tableId": "03h82wuub0xe3qjcygfngka45",
+        "name": "is_owner",
+        "dataType": "BOOL",
+        "options": 0
       },
       "03h86hn0qrqpsomawee6djfrm": {
         "id": "03h86hn0qrqpsomawee6djfrm",
@@ -649,13 +594,6 @@
         "dataType": "VARCHAR",
         "options": 8
       },
-      "03h9fm2gfsnq6eyj7z6ffr4px": {
-        "id": "03h9fm2gfsnq6eyj7z6ffr4px",
-        "tableId": "03h9fm096ncqeledac394tmyc",
-        "name": "slug",
-        "dataType": "VARCHAR",
-        "options": 8
-      },
       "03h9fm5vot9k11djxxjjsc48x": {
         "id": "03h9fm5vot9k11djxxjjsc48x",
         "tableId": "03h9fm096ncqeledac394tmyc",
@@ -682,6 +620,13 @@
         "tableId": "03h9fm096ncqeledac394tmyc",
         "name": "is_premium",
         "dataType": "BOOLEAN",
+        "options": 8
+      },
+      "03hao283o8jkijbjadc6al2kt": {
+        "id": "03hao283o8jkijbjadc6al2kt",
+        "tableId": "03h9fm096ncqeledac394tmyc",
+        "name": "slug",
+        "dataType": "VARCHAR",
         "options": 8
       },
       "03h9fmufxf0umqbst6tx7hmgl": {
@@ -890,24 +835,6 @@
       }
     },
     "relationshipEntities": {
-      "03h82tx4ewuc064eukurm4aoa": {
-        "id": "03h82tx4ewuc064eukurm4aoa",
-        "relationshipType": 16,
-        "onDelete": 1,
-        "onUpdate": 1,
-        "start": {
-          "tableId": "03h82tcqm6cyekuw0ghlcvkru",
-          "columnIds": [
-            "03h82teuyo2bwdoqjd1gt5agt"
-          ]
-        },
-        "end": {
-          "tableId": "03h82tntik3j2uz7yjqvqi01o",
-          "columnIds": [
-            "03h82tx4em1mrom3xam2i02lj"
-          ]
-        }
-      },
       "03h82wwywmpxa89hjbxmku4kr": {
         "id": "03h82wwywmpxa89hjbxmku4kr",
         "relationshipType": 16,
@@ -1122,6 +1049,19 @@
           "columnIds": [
             "03hak90j1uo3orqyczuqrui1y"
           ]
+        }
+      }
+    },
+    "tableGroupEntities": {
+      "03hao2c5o5jd4pqi38v8yppm3": {
+        "id": "03hao2c5o5jd4pqi38v8yppm3",
+        "name": "Sistema de Temas",
+        "color": "#ad7f58",
+        "ui": {
+          "x": 1288.9745,
+          "y": -131.6819,
+          "width": 759.8201438848921,
+          "height": 578.4890863309353
         }
       }
     }

@@ -18,20 +18,22 @@ class DatabaseSeeder extends Seeder
    */
   public function run(): void
   {
-    $user = User::firstOrCreate([
-      'name'      => 'Luis F. Franco',
-    ], [
+    $user = User::updateOrCreate([
       'email'     => 'luisferfranco@gmail.com',
+    ], [
+      'name'      => 'Luis F. Franco',
       'password'  => bcrypt('password'),
     ]);
 
     $this->call([
+      // Temas
+      ThemeSeeder::class,
+      DesignTokenSchemaSeeder::class,
+      ThemeVersionSeeder::class,
+
       PageTypeSeeder::class,
       TenantSeeder::class,
       BlockTypeSeeder::class,
-      DesignTokenSchemaSeeder::class,
-      ThemeSeeder::class,
-      ThemeVersionSeeder::class,
       TenantThemeSeeder::class,
       RoleSeeder::class,
     ]);

@@ -9,14 +9,14 @@ class ThemeSeeder extends Seeder
 {
   public function run(): void
   {
-    Theme::firstOrCreate(
-      ['slug' => 'default'],
+    Theme::updateOrCreate(
+      ['slug'           => 'default'],
       [
-        'name' => 'Default',
-        'description' => 'Tema gratuito predeterminado de Blocks.',
+        'name'          => 'Default',
+        'description'   => 'Tema gratuito predeterminado de Blocks.',
         'preview_image' => null,
-        'is_active' => true,
-        'is_premium' => false,
+        'is_active'     => true,
+        'is_premium'    => false,
       ],
     );
   }

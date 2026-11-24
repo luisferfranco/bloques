@@ -23,6 +23,9 @@ Route::livewire('/{tenant:slug}', "pages::page")
   ->name('pages.home');
 
 // Cualquier otra página del tenant
+Route::livewire('/{tenant:slug}/contacto', "pages::page")
+  ->where('tenant', $tenantSlugPattern)
+  ->name('pages.contacto');
 Route::livewire('/{tenant:slug}/{page:slug}', "pages::page")
   ->where('tenant', $tenantSlugPattern)
   ->name('pages.show');

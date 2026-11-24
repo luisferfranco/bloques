@@ -11,8 +11,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Guarded([])]
 class Page extends Model
 {
-  public function pageType(): BelongsTo {
-    return $this->belongsTo(PageType::class);
+  public function casts(): array {
+    return [
+      'is_active' => 'boolean',
+      'is_system' => 'boolean',
+    ];
   }
   public function tenant(): BelongsTo {
     return $this->belongsTo(Tenant::class);

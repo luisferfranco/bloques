@@ -8,16 +8,21 @@ return new class extends Migration
 {
   /**
    * Run the migrations.
+   *
+   * This migration creates the 'themes' table with columns for name, description,
+   * preview image, active status, and premium status.
    */
   public function up(): void
   {
-    Schema::create('page_types', function (Blueprint $table) {
+    Schema::create('themes', function (Blueprint $table) {
       $table->id();
 
-      $table->string('slug')->unique();
       $table->string('name');
+      $table->string('slug')->unique();
       $table->text('description')->nullable();
+      $table->string('preview_image')->nullable();
       $table->boolean('is_active')->default(true);
+      $table->boolean('is_premium')->default(true);
 
       $table->timestamps();
     });
@@ -28,6 +33,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('page_types');
+    Schema::dropIfExists('themes');
   }
 };
