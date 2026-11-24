@@ -24,7 +24,7 @@ return new class extends Migration
         ->onDelete('cascade');
       $table->integer('sort_order')->default(0);
       $table->json('meta')->nullable();
-      $table->enum(['display_mode'], ['grid', 'list', 'carousel'])
+      $table->enum('display_mode', ['grid', 'list', 'carousel'])
         ->nullable();
 
       $table->timestamps();

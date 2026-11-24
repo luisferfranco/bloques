@@ -32,10 +32,9 @@ class DatabaseSeeder extends Seeder
       ThemeVersionSeeder::class,
 
       TenantSeeder::class,
-      PageSeeder::class,
+      TenantThemeSeeder::class,
 
       BlockTypeSeeder::class,
-      TenantThemeSeeder::class,
       RoleSeeder::class,
     ]);
 

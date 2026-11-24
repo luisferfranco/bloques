@@ -29,15 +29,10 @@ class TenantSeeder extends Seeder
 
     $initialPages = ['inicio', 'nosotros', 'servicios', 'contacto'];
     foreach ($initialPages as $index => $page) {
-      $pageType = PageType::where('slug', $page)
-        ->first();
-
       $tenant->pages()->updateOrCreate([
-        'slug'          => $pageType->slug,
+        'slug'          => $page,
       ], [
-        'page_type_id'  => $pageType->id,
-        'name'          => $pageType->name,
-        'description'   => $pageType->description,
+        'name'          => $page,
         'is_active'     => true,
         'is_system'     => $page == 'contacto',
         'sort_order'    => $index+1,
