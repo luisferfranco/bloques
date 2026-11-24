@@ -4,6 +4,7 @@ namespace App\Filament\Dashboard\Pages;
 
 use App\Models\PageType;
 use App\Models\Tenant;
+use App\Models\ThemeVersion;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Tenancy\RegisterTenant;
 use Filament\Schemas\Schema;
@@ -40,10 +41,16 @@ class CreateTenant extends RegisterTenant
   {
     return DB::transaction(function () use ($data): Tenant {
       // 1. Crear tenant
+
+    $themeVersion = ThemeVersion::query()
+      ->latest('version')
+      ->firstOrFail();
+
       $tenant = Tenant::create([
         'name' => $data['name'],
         'slug' => $data['slug'],
         'is_active' => true,
+        'theme_version_id' => $themeVersion->id,
       ]);
 
       // 2. Asociar usuario autenticado

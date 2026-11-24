@@ -48,6 +48,11 @@ class Hero extends Page
   public function form(Schema $schema): Schema
   {
     return $schema->components([
+      Toggle::make('help')
+        ->live()
+        ->label('Mostrar ayuda')
+        ->default(false),
+
       Section::make('Contenido')
         ->columns(2)
         ->schema([
@@ -65,6 +70,12 @@ class Hero extends Page
             ->label('Descripción')
             ->rows(4)
             ->columnSpanFull(),
+
+          Toggle::make('claro')
+            ->label('Letras Claras')
+            ->default(false)
+            ->columnSpanFull()
+            ->helperText(fn (callable $get) => $get('help') ? 'Si tienes un fondo oscuro, activa esta opción para que el tema sea claro y sea visible' : null)
         ]),
 
       Section::make('Imagen')
@@ -75,8 +86,7 @@ class Hero extends Page
             ->image()
             ->disk('public')
             ->directory('blocks/hero')
-            ->visibility('public')
-            ->columnSpanFull(),
+            ->visibility('public'),
 
           Select::make('image_position')
             ->label('Posición de imagen')
@@ -91,7 +101,8 @@ class Hero extends Page
 
           Toggle::make('overlay')
             ->label('Superposición oscura')
-            ->default(false),
+            ->default(false)
+            ->helperText(fn (callable $get) => $get('help') ? 'Activa esta opción para añadir una superposición oscura sobre la imagen de fondo. Si lo haces, recomendamos que utilices un texto claro para que sea claramente visible' : null),
         ]),
 
       Section::make('Presentación')

@@ -18,8 +18,8 @@ new class extends Component
 
 <section
   class="relative flex items-center w-full px-6 py-12 overflow-hidden isolate min-h-162"
-  style="background-color: var(--background); color: var(--foreground); font-family: var(--font-body);"
->
+  style="background-color: var(--background); color: {{ $params->claro ? '#eeeeee' : 'var(--foreground)' }}; font-family: var(--font-body);"
+  >
   {{-- Imagen de fondo --}}
   @if ($params->background_image ?? false)
     <img
@@ -73,31 +73,13 @@ new class extends Component
           'justify-center' => ($params->alignment ?? 'center') === 'center',
           'justify-end' => ($params->alignment ?? 'center') === 'right',
         ])
-      >
-        <a
-          href="{{ $params->button_url }}"
-          @class([
-            'inline-flex items-center px-6 py-3 font-semibold transition',
-            'hover:opacity-90' => in_array(
-              $params->button_style ?? 'primary',
-              ['primary', 'secondary']
-            ),
-            'underline underline-offset-4 hover:opacity-80' =>
-              ($params->button_style ?? 'primary') === 'link',
-          ])
-          @style([
-            'background-color: var(--primary); color: var(--primary-foreground); border-radius: var(--button-radius);' =>
-              ($params->button_style ?? 'primary') === 'primary',
-            'background-color: var(--secondary); color: var(--secondary-foreground); border-radius: var(--button-radius);' =>
-              ($params->button_style ?? 'primary') === 'secondary',
-            'background-color: transparent; color: var(--primary); border: 2px solid var(--primary); border-radius: var(--button-radius);' =>
-              ($params->button_style ?? 'primary') === 'outline',
-            'background-color: transparent; color: var(--primary);' =>
-              ($params->button_style ?? 'primary') === 'link',
-          ])
         >
-          {{ $params->button_text }}
-        </a>
+        <x-ui.button
+          href="{{ $params->button_url }}"
+          :variant="$params->button_style ?? 'primary'"
+          size="lg"
+          :label="$params->button_text"
+          />
       </div>
     @endif
   </div>

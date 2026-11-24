@@ -82,6 +82,7 @@
           "03h82tqd8kosfmw5zdiuvi6vh",
           "03h82tx4em1mrom3xam2i02lj",
           "03h82wzkqqy2m0c0q2bwhqnbx",
+          "03haj5lif2tcdgwq26zjvysej",
           "03h82trnh3nazwl6t8an2x4pl",
           "03h82tsg3am1x0fje8auiuvn5",
           "03h82tt4phf2ib0ko4boa9bcb",
@@ -377,6 +378,13 @@
         "name": "tenant_id",
         "dataType": "INT",
         "options": 8
+      },
+      "03haj5lif2tcdgwq26zjvysej": {
+        "id": "03haj5lif2tcdgwq26zjvysej",
+        "tableId": "03h82tntik3j2uz7yjqvqi01o",
+        "name": "tarjetero_id",
+        "dataType": "INT",
+        "options": 0
       },
       "03h82wii0nbzx5qzr2qa6ce0d": {
         "id": "03h82wii0nbzx5qzr2qa6ce0d",

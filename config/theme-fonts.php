@@ -2,6 +2,11 @@
 
 return [
   'display' => [
+    'carter-one' => [
+      'name' => 'Carter One',
+      'family' => 'Carter One',
+      'weights' => [400],
+    ],
     'oswald' => [
       'name' => 'Oswald',
       'family' => 'Oswald',
@@ -30,6 +35,11 @@ return [
   ],
 
   'text' => [
+    'walter-turncoat' => [
+      'name' => 'Walter Turncoat',
+      'family' => 'Walter Turncoat',
+      'weights' => [400, 700],
+    ],
     'inter' => [
       'name' => 'Inter',
       'family' => 'Inter',
@@ -80,47 +90,55 @@ return [
     ],
   ],
 
-'default' => 'inter',
+  'default' => 'inter',
 
-'presets' => [
-  'inter' => [
-    'name' => 'Inter',
-    'tier' => 'default',
-    'heading' => 'inter',
-    'body' => 'inter',
-    'mono' => 'roboto-mono',
-  ],
+  'presets' => [
+    'inter' => [
+      'name' => 'Inter',
+      'tier' => 'default',
+      'heading' => 'inter',
+      'body' => 'inter',
+      'mono' => 'roboto-mono',
+    ],
 
-  'oswald-inter' => [
-    'name' => 'Oswald + Inter',
-    'tier' => 'premium',
-    'heading' => 'oswald',
-    'body' => 'inter',
-    'mono' => 'roboto-mono',
-  ],
+    'oswald-inter' => [
+      'name' => 'Oswald + Inter',
+      'tier' => 'premium',
+      'heading' => 'oswald',
+      'body' => 'inter',
+      'mono' => 'roboto-mono',
+    ],
 
-  'roboto-condensed-roboto' => [
-    'name' => 'Roboto Condensed + Roboto',
-    'tier' => 'premium',
-    'heading' => 'roboto-condensed',
-    'body' => 'roboto',
-    'mono' => 'roboto-mono',
-  ],
+    'roboto-condensed-roboto' => [
+      'name' => 'Roboto Condensed + Roboto',
+      'tier' => 'premium',
+      'heading' => 'roboto-condensed',
+      'body' => 'roboto',
+      'mono' => 'roboto-mono',
+    ],
 
-  'playfair-open-sans' => [
-    'name' => 'Playfair Display + Open Sans',
-    'tier' => 'premium',
-    'heading' => 'playfair-display',
-    'body' => 'open-sans',
-    'mono' => 'roboto-mono',
-  ],
+    'playfair-open-sans' => [
+      'name' => 'Playfair Display + Open Sans',
+      'tier' => 'premium',
+      'heading' => 'playfair-display',
+      'body' => 'open-sans',
+      'mono' => 'roboto-mono',
+    ],
 
-  'anton-inter' => [
-    'name' => 'Anton + Inter',
-    'tier' => 'premium',
-    'heading' => 'anton',
-    'body' => 'inter',
-    'mono' => 'roboto-mono',
+    'anton-inter' => [
+      'name' => 'Anton + Inter',
+      'tier' => 'premium',
+      'heading' => 'anton',
+      'body' => 'inter',
+      'mono' => 'roboto-mono',
+    ],
+
+    'carter-walter' => [
+      'name' => 'Carter One + Walter Turncoat',
+      'tier' => 'premium',
+      'heading' => 'carter-one',
+      'body' => 'walter-turncoat',
+      'mono' => 'roboto-mono',
+    ],
   ],
-],
 ];
