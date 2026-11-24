@@ -17,7 +17,7 @@ class TenantSeeder extends Seeder
       'slug'          => 'default-tenant',
     ], [
       'name'          => 'Default Tenant',
-      'settings'      => [
+      'meta'          => [
         'typography'  => [
           'preset'    => 'oswald-inter',
       ]],
@@ -39,7 +39,7 @@ class TenantSeeder extends Seeder
         'name'          => $pageType->name,
         'description'   => $pageType->description,
         'is_active'     => true,
-        'is_system'     => true,
+        'is_system'     => $page == 'contacto',
         'sort_order'    => $index+1,
       ]);
     }

@@ -31,8 +31,9 @@ class DatabaseSeeder extends Seeder
       DesignTokenSchemaSeeder::class,
       ThemeVersionSeeder::class,
 
-      PageTypeSeeder::class,
       TenantSeeder::class,
+      PageSeeder::class,
+
       BlockTypeSeeder::class,
       TenantThemeSeeder::class,
       RoleSeeder::class,

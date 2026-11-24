@@ -16,17 +16,14 @@ return new class extends Migration
     Schema::create('blocks', function (Blueprint $table) {
       $table->id();
 
-      $table->foreignIdFor(Page::class)
-        ->constrained()
-        ->onDelete('cascade');
       $table->foreignIdFor(BlockType::class)
         ->constrained()
         ->onDelete('cascade');
+
       $table->string('name');
       $table->text('description')->nullable();
-      $table->json('params')->nullable();
+      $table->json('meta')->nullable();
       $table->boolean('is_active')->default(true);
-      $table->integer('sort_order')->default(0);
 
       $table->timestamps();
     });
