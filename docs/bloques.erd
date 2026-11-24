@@ -62,7 +62,7 @@
     "tableEntities": {
       "03h82tcqm6cyekuw0ghlcvkru": {
         "id": "03h82tcqm6cyekuw0ghlcvkru",
-        "name": "page_type",
+        "name": "page_types",
         "columnIds": [
           "03h82teuyo2bwdoqjd1gt5agt",
           "03h82uckntr3aufw8n6mjns0b",
@@ -208,7 +208,7 @@
       },
       "03h9fmstk6fwhnj9ermw293ph": {
         "id": "03h9fmstk6fwhnj9ermw293ph",
-        "name": "theme_version",
+        "name": "theme_versions",
         "columnIds": [
           "03h9fmufxf0umqbst6tx7hmgl",
           "03h9fnc4tlxlf34n579du3328",
