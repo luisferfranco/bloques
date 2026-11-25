@@ -17,9 +17,6 @@ class PagesTable
     return $table
       ->reorderable('sort_order')
       ->columns([
-        TextColumn::make('pageType.name')
-          ->label('Tipo')
-          ->searchable(),
         TextColumn::make('name')
           ->label('Nombre')
           ->searchable(),
@@ -27,9 +24,6 @@ class PagesTable
           ->searchable(),
         ToggleColumn::make('is_active')
           ->label('Activa'),
-        IconColumn::make('is_system')
-          ->label('Sistema')
-          ->boolean(),
         TextColumn::make('sort_order')
           ->label('Orden')
           ->numeric()
@@ -47,7 +41,8 @@ class PagesTable
         //
       ])
       ->recordActions([
-        EditAction::make(),
+        EditAction::make()
+          ->visible(fn ($record) => !$record->is_system),
       ])
       ->toolbarActions([
         BulkActionGroup::make([

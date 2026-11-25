@@ -2,6 +2,11 @@
 
 namespace App\Filament\Dashboard\Resources\Pages\RelationManagers;
 
+use App\Filament\Dashboard\Pages\Blocks\Hero;
+use App\Filament\Dashboard\Pages\Blocks\MissionVision;
+use App\Models\Block;
+use App\Models\BlockType;
+use Filament\Actions\Action;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
@@ -11,18 +16,15 @@ use Filament\Actions\DissociateAction;
 use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
 use Filament\Tables\Columns\ToggleColumn;
-use Filament\Actions\Action;
-use App\Models\Block;
-use App\Filament\Dashboard\Pages\Blocks\Hero;
-use App\Filament\Dashboard\Pages\Blocks\MissionVision;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class BlocksRelationManager extends RelationManager
 {
@@ -32,21 +34,43 @@ class BlocksRelationManager extends RelationManager
   {
     return $schema
       ->components([
+        Toggle::make('ayuda')
+          ->label('Ayuda para los campos')
+          ->live()
+          ->columnSpanFull(),
+
         Select::make('block_type_id')
+          ->label('Tipo de Bloque')
           ->relationship('blockType', 'name')
+          ->helperText(fn ($get) =>
+            $get('ayuda')
+              ? 'Selecciona el tipo de bloque que deseas agregar'
+              : null
+          )
           ->required(),
         TextInput::make('name')
-          ->required(),
+          ->label('Nombre')
+          ->helperText(fn ($get) =>
+            $get('ayuda')
+              ? 'Ingresa el nombre del bloque. Este valor es para que tu lo identifiques y puedas usarlo en otras páginas. No se despliega en ningún lugar del sitio.'
+              : null
+          ),
         Textarea::make('description')
-          ->columnSpanFull(),
-        Textarea::make('params')
+          ->label('Descripción')
+          ->helperText(fn ($get) =>
+            $get('ayuda')
+              ? 'Ingresa una descripción para el bloque. Este valor es para ti y que sepas que hace este bloque. No se despliega en ningún lugar del sitio.'
+              : null
+          )
           ->columnSpanFull(),
         Toggle::make('is_active')
-          ->required(),
-        TextInput::make('sort_order')
-          ->required()
-          ->numeric()
-          ->default(0),
+          ->label('Activo')
+          ->helperText(fn ($get) =>
+            $get('ayuda')
+              ? 'Activa o desactiva el bloque'
+              : null
+          )
+          ->columnSpanFull(),
       ]);
   }
 
@@ -64,6 +88,9 @@ class BlocksRelationManager extends RelationManager
           ->searchable(),
         ToggleColumn::make('is_active')
           ->label('Activo'),
+        TextColumn::make('sort_order')
+          ->label('Orden')
+          ->sortable(),
         TextColumn::make('created_at')
           ->dateTime()
           ->sortable()
@@ -77,7 +104,28 @@ class BlocksRelationManager extends RelationManager
         //
       ])
       ->headerActions([
-        CreateAction::make(),
+        CreateAction::make()
+          ->mutateDataUsing(function (array $data) {
+              unset($data['ayuda']);
+
+              if (blank($data['name'] ?? null)) {
+                $data['name'] = BlockType::find($data['block_type_id'])->name ?? null;
+              }
+
+              return $data;
+          })
+          ->using(function (CreateAction $action, array $data): Model {
+            $relationship = $action->getRelationship();
+
+            $sortOrder = $relationship->count() + 1;
+
+            $record = new Block();
+            $record->fill($data);
+
+            return $relationship->save($record, [
+              'sort_order' => $sortOrder,
+            ]);
+          }),
         AssociateAction::make(),
       ])
       ->recordActions([

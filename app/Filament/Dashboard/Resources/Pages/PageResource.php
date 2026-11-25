@@ -10,7 +10,6 @@ use App\Models\Page;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Dashboard\Resources\Pages\RelationManagers\BlocksRelationManager;
@@ -18,8 +17,9 @@ use App\Filament\Dashboard\Resources\Pages\RelationManagers\BlocksRelationManage
 class PageResource extends Resource
 {
   protected static ?string $model = Page::class;
-
-  protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+  protected static ?string $modelLabel = 'página';
+  protected static ?string $pluralModelLabel = 'páginas';
+  protected static string|BackedEnum|null $navigationIcon = 'lucide-layers';
 
   protected static ?string $recordTitleAttribute = 'name';
 
