@@ -18,7 +18,7 @@ new class extends Component
 
 <section
   class="relative flex items-center w-full px-6 py-12 overflow-hidden isolate min-h-162"
-  style="background-color: var(--background); color: {{ isset($meta->claro) ? '#eeeeee' : 'var(--foreground)' }}; font-family: var(--font-body);"
+  style="background-color: {{ $meta->background_color ?? 'var(--background)' }}; color: {{ isset($meta->claro) ? '#eeeeee' : 'var(--foreground)' }}; font-family: var(--font-body);"
   >
   {{-- Imagen de fondo --}}
   @if ($meta->background_image ?? false)

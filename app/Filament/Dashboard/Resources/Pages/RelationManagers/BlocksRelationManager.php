@@ -146,10 +146,7 @@ class BlocksRelationManager extends RelationManager
             if (!$page) return null;
 
             $config = "App\\Filament\\Dashboard\\Pages\\Blocks\\{$page}";
-            logger()->debug('Configuration class: ' . $config);
-
             if (!class_exists($config)) return null;
-            logger()->debug('Class exists: ' . class_exists($config));
 
             return $config::getUrl([
               'block' => $record->getKey(),

@@ -38,7 +38,7 @@ class MissionVision extends Page
 
     // Hidrata el schema 'form' apuntando a $this->data
     $this->form->fill([
-      'mission' => $params['mission'] ?? null,
+      'mission' => $paramss['mission'] ?? null,
       'vision'  => $params['vision'] ?? null,
     ]);
   }

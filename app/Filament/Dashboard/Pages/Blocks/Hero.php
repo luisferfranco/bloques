@@ -5,10 +5,11 @@ namespace App\Filament\Dashboard\Pages\Blocks;
 use App\Models\Block;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -16,6 +17,7 @@ use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\EmbeddedSchema;
 use Filament\Schemas\Components\Form;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Alignment;
@@ -32,12 +34,26 @@ class Hero extends Page
   public function mount(): void
   {
     $this->blockId = (int) request()->query('block');
-
     abort_if($this->blockId <= 0, 404);
 
-    $this->form->fill(
-      $this->getBlock()->params ?? []
-    );
+    $block = $this->getBlock();
+    logger()->debug('Loaded block', ['block' => $block]);
+
+    $this->form->fill($block->meta ?? []);
+  }
+
+  protected function getBlock(): Block
+  {
+    // Verificar que el bloque corresponda al tenant y sea del tipo correcto
+    $tenant = Filament::getTenant();
+    abort_unless($tenant, 404);
+
+    $block = Block::find($this->blockId);
+    abort_unless($block && $block->blockType->slug === 'hero', 404);
+
+    abort_unless($block->pages()->where('tenant_id', $tenant->id)->exists(), 404);
+
+    return $block;
   }
 
   public function defaultForm(Schema $schema): Schema
@@ -58,16 +74,31 @@ class Hero extends Page
         ->schema([
           TextInput::make('title')
             ->label('Título')
+            ->helperText(fn ($get) =>
+              $get('help')
+              ? 'El título principal son las palabras mas grandes que aparecerán en el bloque'
+              : null
+            )
             ->maxLength(255)
             ->columnSpanFull(),
 
           TextInput::make('subtitle')
             ->label('Subtítulo')
+            ->helperText(fn ($get) =>
+              $get('help')
+              ? 'El subtítulo es un texto secundario que aparece debajo del título principal'
+              : null
+            )
             ->maxLength(255)
             ->columnSpanFull(),
 
           Textarea::make('description')
             ->label('Descripción')
+            ->helperText(fn ($get) =>
+              $get('help')
+              ? 'La descripción proporciona información adicional al título, es un texto explicativo que se pone en una letra de menor tamaño'
+              : null
+            )
             ->rows(4)
             ->columnSpanFull(),
 
@@ -75,40 +106,70 @@ class Hero extends Page
             ->label('Letras Claras')
             ->default(false)
             ->columnSpanFull()
-            ->helperText(fn (callable $get) => $get('help') ? 'Si tienes un fondo oscuro, activa esta opción para que el tema sea claro y sea visible' : null)
+            ->helperText(fn ($get) =>
+              $get('help')
+              ? 'Si tienes un fondo oscuro, activa esta opción para que el tema sea claro y sea visible'
+              : null
+            )
         ]),
 
-      Section::make('Imagen')
-        ->columns(2)
+      Section::make('Fondo')
+        ->columns(4)
         ->schema([
-          FileUpload::make('background_image')
-            ->label('Imagen de fondo')
-            ->image()
-            ->disk('public')
-            ->directory('blocks/hero')
-            ->visibility('public'),
-
-          Select::make('image_position')
-            ->label('Posición de imagen')
-            ->options([
-              'center' => 'Centro',
-              'top' => 'Superior',
-              'bottom' => 'Inferior',
-              'left' => 'Izquierda',
-              'right' => 'Derecha',
+          Grid::make()
+            ->columns(1)
+            ->schema([
+              FileUpload::make('background_image')
+                ->label('Imagen de fondo')
+                ->helperText(fn ($get) =>
+                  $get('help')
+                  ? 'La imagen de fondo se mostrará detrás del contenido del bloque, deberá tener un tamaño máximo de 1MB. Ten en cuenta que la imagen se adapta al tamaño del bloque, prueba cómo se ve la imagen en diferentes dispositivos y haz los ajustes necesarios'
+                  : null
+                )
+                ->image()
+                ->disk('public')
+                ->directory('blocks/hero')
+                ->visibility('public'),
+              Select::make('image_position')
+                ->label('Posición de imagen')
+                ->helperText(fn ($get) =>
+                  $get('help')
+                  ? 'Selecciona la posición de la imagen de fondo dentro del bloque'
+                  : null
+                )
+                ->options([
+                  'center' => 'Centro',
+                  'top' => 'Superior',
+                  'bottom' => 'Inferior',
+                  'left' => 'Izquierda',
+                  'right' => 'Derecha',
+                ])
+                ->default('center'),
+              Toggle::make('overlay')
+                ->label('Superposición oscura')
+                ->default(false)
+                ->helperText(fn (callable $get) => $get('help') ? 'Activa esta opción para añadir una superposición oscura sobre la imagen de fondo. Si lo haces, recomendamos que utilices un texto claro para que sea claramente visible' : null),
             ])
-            ->default('center'),
+            ->columnSpan(3),
+          ColorPicker::make('background_color')
+            ->label('Color de fondo')
+            ->helperText(fn ($get) =>
+              $get('help')
+              ? 'Indica el color de fondo del bloque, se usa si no existe una imagen de fondo'
+              : null
+            ),
+          ]),
 
-          Toggle::make('overlay')
-            ->label('Superposición oscura')
-            ->default(false)
-            ->helperText(fn (callable $get) => $get('help') ? 'Activa esta opción para añadir una superposición oscura sobre la imagen de fondo. Si lo haces, recomendamos que utilices un texto claro para que sea claramente visible' : null),
-        ]),
 
       Section::make('Presentación')
         ->schema([
           Select::make('alignment')
             ->label('Alineación del contenido')
+            ->helperText(fn ($get) =>
+              $get('help')
+              ? 'Selecciona la alineación del texto dentro del bloque'
+              : null
+            )
             ->options([
               'left' => 'Izquierda',
               'center' => 'Centro',
@@ -175,8 +236,8 @@ class Hero extends Page
     $block = $this->getBlock();
 
     $block->update([
-      'params' => array_replace(
-        $block->params ?? [],
+      'meta' => array_replace(
+        $block->meta ?? [],
         $data
       ),
     ]);
@@ -185,29 +246,5 @@ class Hero extends Page
       ->title('Configuración guardada')
       ->success()
       ->send();
-  }
-
-  protected function getBlock(): Block
-  {
-    $tenant = Filament::getTenant();
-
-    abort_unless($tenant, 404);
-
-    return Block::query()
-      ->whereKey($this->blockId)
-      ->whereHas(
-        'blockType',
-        fn (Builder $query) => $query->where(
-          'component',
-          'blocks.hero'
-        )
-      )
-      ->whereHas(
-        'page.tenant',
-        fn (Builder $query) => $query->whereKey(
-          $tenant->getKey()
-        )
-      )
-      ->firstOrFail();
   }
 }
