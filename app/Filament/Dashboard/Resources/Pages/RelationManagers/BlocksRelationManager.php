@@ -88,9 +88,6 @@ class BlocksRelationManager extends RelationManager
           ->searchable(),
         ToggleColumn::make('is_active')
           ->label('Activo'),
-        TextColumn::make('sort_order')
-          ->label('Orden')
-          ->sortable(),
         TextColumn::make('created_at')
           ->dateTime()
           ->sortable()
@@ -105,6 +102,8 @@ class BlocksRelationManager extends RelationManager
       ])
       ->headerActions([
         CreateAction::make()
+          ->label('Crear Bloque')
+          ->icon('lucide-grid-2x2-plus')
           ->mutateDataUsing(function (array $data) {
               unset($data['ayuda']);
 
@@ -126,7 +125,9 @@ class BlocksRelationManager extends RelationManager
               'sort_order' => $sortOrder,
             ]);
           }),
-        AssociateAction::make(),
+        AssociateAction::make()
+          ->label('Asociar Bloque Existente')
+          ->icon('lucide-blocks'),
       ])
       ->recordActions([
         EditAction::make()
@@ -139,14 +140,20 @@ class BlocksRelationManager extends RelationManager
           ->iconButton()
           ->icon('heroicon-o-cog-8-tooth')
           ->tooltip('Configurar Bloque')
-          ->url(fn (Block $record): string => match($record->blockType->slug) {
-            'hero' => Hero::getUrl([
+          ->url(function (Block $record): ?string {
+            $page = $record->blockType->configuration_class ?? null;
+
+            if (!$page) return null;
+
+            $config = "App\\Filament\\Dashboard\\Pages\\Blocks\\{$page}";
+            logger()->debug('Configuration class: ' . $config);
+
+            if (!class_exists($config)) return null;
+            logger()->debug('Class exists: ' . class_exists($config));
+
+            return $config::getUrl([
               'block' => $record->getKey(),
-            ]),
-            'mission-vision' => MissionVision::getUrl([
-              'block' => $record->getKey(),
-            ]),
-            default => '#',
+            ]);
           })
       ])
       ->toolbarActions([

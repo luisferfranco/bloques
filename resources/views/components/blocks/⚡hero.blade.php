@@ -7,31 +7,31 @@ use Livewire\Component;
 
 new class extends Component
 {
-  public $params;
+  public $meta;
 
   public function mount(Block $block): void
   {
-    $this->params = (object) ($block->params ?? []);
+    $this->meta = (object) ($block->meta ?? []);
   }
 };
 ?>
 
 <section
   class="relative flex items-center w-full px-6 py-12 overflow-hidden isolate min-h-162"
-  style="background-color: var(--background); color: {{ $params->claro ? '#eeeeee' : 'var(--foreground)' }}; font-family: var(--font-body);"
+  style="background-color: var(--background); color: {{ isset($meta->claro) ? '#eeeeee' : 'var(--foreground)' }}; font-family: var(--font-body);"
   >
   {{-- Imagen de fondo --}}
-  @if ($params->background_image ?? false)
+  @if ($meta->background_image ?? false)
     <img
-      src="{{ Storage::disk('public')->url($params->background_image) }}"
+      src="{{ Storage::disk('public')->url($meta->background_image) }}"
       alt=""
       class="absolute inset-0 object-cover w-full h-full -z-10"
-      style="object-position: {{ $params->image_position ?? 'center' }};"
+      style="object-position: {{ $meta->image_position ?? 'center' }};"
     >
   @endif
 
   {{-- Superposición oscura --}}
-  @if ($params->overlay ?? false)
+  @if ($meta->overlay ?? false)
     <div class="absolute inset-0 -z-0 bg-black/50"></div>
   @endif
 
@@ -39,46 +39,46 @@ new class extends Component
   <div
     @class([
       'relative z-10 mx-auto w-full max-w-6xl',
-      'text-left' => ($params->alignment ?? 'center') === 'left',
-      'text-center' => ($params->alignment ?? 'center') === 'center',
-      'text-right' => ($params->alignment ?? 'center') === 'right',
+      'text-left' => ($meta->alignment ?? 'center') === 'left',
+      'text-center' => ($meta->alignment ?? 'center') === 'center',
+      'text-right' => ($meta->alignment ?? 'center') === 'right',
     ])
   >
-    @if ($params->subtitle ?? false)
+    @if ($meta->subtitle ?? false)
       <p class="mb-3 text-lg font-medium tracking-wide">
-        {{ $params->subtitle }}
+        {{ $meta->subtitle }}
       </p>
     @endif
 
-    @if ($params->title ?? false)
+    @if ($meta->title ?? false)
       <h1
         style="font-family: var(--font-heading)"
         class="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
         >
-        {{ $params->title }}
+        {{ $meta->title }}
       </h1>
     @endif
 
-    @if ($params->description ?? false)
+    @if ($meta->description ?? false)
       <p class="max-w-3xl mx-auto mt-5 text-base leading-relaxed sm:text-lg">
-        {{ $params->description }}
+        {{ $meta->description }}
       </p>
     @endif
 
-    @if (($params->button_text ?? false) && ($params->button_url ?? false))
+    @if (($meta->button_text ?? false) && ($meta->button_url ?? false))
       <div
         @class([
           'mt-8 flex',
-          'justify-start' => ($params->alignment ?? 'center') === 'left',
-          'justify-center' => ($params->alignment ?? 'center') === 'center',
-          'justify-end' => ($params->alignment ?? 'center') === 'right',
+          'justify-start' => ($meta->alignment ?? 'center') === 'left',
+          'justify-center' => ($meta->alignment ?? 'center') === 'center',
+          'justify-end' => ($meta->alignment ?? 'center') === 'right',
         ])
         >
         <x-ui.button
-          href="{{ $params->button_url }}"
-          :variant="$params->button_style ?? 'primary'"
+          href="{{ $meta->button_url }}"
+          :variant="$meta->button_style ?? 'primary'"
           size="lg"
-          :label="$params->button_text"
+          :label="$meta->button_text"
           />
       </div>
     @endif

@@ -32,9 +32,9 @@ class MissionVision extends Page
 
     $block = $this->getBlock();
 
-    $params = is_string($block->params)
-      ? (json_decode($block->params, true) ?? [])
-      : ($block->params ?? []);
+    $params = is_string($block->meta)
+      ? (json_decode($block->meta, true) ?? [])
+      : ($block->meta ?? []);
 
     // Hidrata el schema 'form' apuntando a $this->data
     $this->form->fill([
@@ -45,24 +45,16 @@ class MissionVision extends Page
 
   protected function getBlock(): Block
   {
+    // Verificar que el bloque corresponda al tenant y sea del tipo correcto
     $tenant = Filament::getTenant();
-
     abort_unless($tenant, 404);
 
-    $bt = BlockType::query()
-      ->where('slug', 'mission-vision')
-      ->firstOrFail();
+    $block = Block::find($this->blockId);
+    abort_unless($block && $block->blockType->slug === 'mission-vision', 404);
 
-    return Block::query()
-      ->whereKey($this->blockId)
-      ->where('block_type_id', $bt->getKey())
-      ->whereHas(
-        'page.tenant',
-        fn (Builder $query) => $query->whereKey(
-          $tenant->getKey()
-        )
-      )
-      ->firstOrFail();
+    abort_unless($block->pages()->where('tenant_id', $tenant->id)->exists(), 404);
+
+    return $block;
   }
 
   public function form(Schema $schema): Schema
@@ -71,16 +63,16 @@ class MissionVision extends Page
       ->statePath('data')
       ->columns(2)
       ->components([
-        Textarea::make('mission')
-          ->label('Misión')
-          ->rows(4),
-        Textarea::make('vision')
-          ->label('Visión')
-          ->rows(4),
         Callout::make('Misión y Visión')
           ->description('Escribe un par de renglones sobre la misión y visión de tu empresa')
           ->info()
           ->columnSpanFull(),
+        Textarea::make('mission')
+          ->label('Misión')
+          ->rows(5),
+        Textarea::make('vision')
+          ->label('Visión')
+          ->rows(5),
       ]);
   }
 
@@ -110,13 +102,13 @@ class MissionVision extends Page
 
     $block = Block::findOrFail($this->blockId);
 
-    $currentParams = is_string($block->params)
-      ? (json_decode($block->params, true) ?? [])
-      : ($block->params ?? []);
+    $currentParams = is_string($block->meta)
+      ? (json_decode($block->meta, true) ?? [])
+      : ($block->meta ?? []);
 
     // Conserva cualquier otra llave previa en params y actualiza mission y vision
     $block->update([
-      'params' => array_merge($currentParams, [
+      'meta' => array_merge($currentParams, [
         'mission' => $state['mission'] ?? null,
         'vision'  => $state['vision'] ?? null,
       ]),

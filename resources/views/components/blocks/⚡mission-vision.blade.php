@@ -5,11 +5,11 @@ use App\Models\Block;
 
 new class extends Component
 {
-  public $params;
+  public $meta;
 
   public function mount(Block $block): void
   {
-    $this->params = (object) ($block->params ?? []);
+    $this->meta = (object) ($block->meta ?? []);
   }
 };
 ?>
@@ -30,7 +30,7 @@ new class extends Component
     </h2>
 
     <p class="leading-relaxed">
-      {{ $params->mission ?? '' }}
+      {{ $meta->mission ?? '' }}
     </p>
   </article>
 
@@ -45,7 +45,7 @@ new class extends Component
     </h2>
 
     <p class="leading-relaxed">
-      {{ $params->vision ?? '' }}
+      {{ $meta->vision ?? '' }}
     </p>
   </article>
 </section>
