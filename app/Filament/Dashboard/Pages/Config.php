@@ -70,7 +70,7 @@ class Config extends Page implements HasSchemas
     $settings['typography']['preset'] = $data['typography']['preset'];
 
     $tenant->update([
-      'settings' => $settings,
+      'meta' => $settings,
     ]);
 
     Notification::make()

@@ -52,7 +52,7 @@ new class extends Component
     $this->googleFontsUrl = null;
 
     $defaultPreset = config('theme-fonts.default', 'inter');
-    $presetId = $this->tenant->settings['typography']['preset'] ?? $defaultPreset;
+    $presetId = $this->tenant->meta['typography']['preset'] ?? $defaultPreset;
 
     logger()->info('Preset ID: ' . $presetId);
 
