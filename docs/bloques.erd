@@ -50,7 +50,8 @@
       "03h9fvokzw45zrwngvb9px6of",
       "03hak75asebugj8f5q8o44jw4",
       "03hak76kjgd04offjhncp0kqt",
-      "03hak7y3l9w3bxo3ufj1fk092"
+      "03hak7y3l9w3bxo3ufj1fk092",
+      "03hb6lg93edkia1xi4701ip9s"
     ],
     "tableGroupIds": [
       "03hao2c5o5jd4pqi38v8yppm3",
@@ -148,6 +149,7 @@
         "columnIds": [
           "03h86i2l245uab0gj3xoefqba",
           "03h86i9m5kna7zf40hygwkg7l",
+          "03hb6lg92n2zayyevr2sbimso",
           "03h86i3n2frsco78qkrkzdofr",
           "03h86i4vhsrgk2c82er9jdgx5",
           "03h86i6l0yua75ma0iu28y39u",
@@ -514,6 +516,13 @@
         "id": "03h86i9m5kna7zf40hygwkg7l",
         "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
         "name": "block_type_id",
+        "dataType": "INT",
+        "options": 8
+      },
+      "03hb6lg92n2zayyevr2sbimso": {
+        "id": "03hb6lg92n2zayyevr2sbimso",
+        "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+        "name": "tenant_id",
         "dataType": "INT",
         "options": 8
       },
@@ -949,6 +958,24 @@
           "tableId": "03hak7gyh73oafw61je9fvytp",
           "columnIds": [
             "03hak7y3l9w3bxo3ufhtrtrna"
+          ]
+        }
+      },
+      "03hb6lg93edkia1xi4701ip9s": {
+        "id": "03hb6lg93edkia1xi4701ip9s",
+        "relationshipType": 4,
+        "onDelete": 1,
+        "onUpdate": 1,
+        "start": {
+          "tableId": "03h82whevb5trwex5s5mlc87g",
+          "columnIds": [
+            "03h82wnv4u2062vzq40yyw70g"
+          ]
+        },
+        "end": {
+          "tableId": "03h86hzm9iebd0gjk1lk7yo0z",
+          "columnIds": [
+            "03hb6lg92n2zayyevr2sbimso"
           ]
         }
       }

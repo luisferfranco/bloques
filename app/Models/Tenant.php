@@ -31,4 +31,7 @@ class Tenant extends Model
   public function themeVersion(): BelongsTo {
     return $this->belongsTo(ThemeVersion::class);
   }
+  public function blocks(): HasMany {
+    return $this->hasMany(Block::class);
+  }
 }

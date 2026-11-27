@@ -5,44 +5,26 @@ namespace App\Filament\Dashboard\Resources\Services\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Tables\Columns\ToggleColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class ServicesTable
 {
-  public static function configure(Table $table): Table
-  {
-    return $table
-      ->columns([
-        TextColumn::make('name')
-          ->label('Nombre')
-          ->searchable(),
-        TextColumn::make('price')
-          ->label('Precio')
-          ->money()
-          ->sortable(),
-        ToggleColumn::make('is_active')
-          ->label('Activo'),
-        TextColumn::make('created_at')
-          ->dateTime()
-          ->sortable()
-          ->toggleable(isToggledHiddenByDefault: true),
-        TextColumn::make('updated_at')
-          ->dateTime()
-          ->sortable()
-          ->toggleable(isToggledHiddenByDefault: true),
-      ])
-      ->filters([
-        //
-      ])
-      ->recordActions([
-        EditAction::make(),
-      ])
-      ->toolbarActions([
-        BulkActionGroup::make([
-          DeleteBulkAction::make(),
-        ]),
-      ]);
-  }
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+                //
+            ])
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                EditAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
 }

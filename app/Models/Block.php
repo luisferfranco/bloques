@@ -33,4 +33,7 @@ class Block extends Model
   public function blockItems(): HasMany {
     return $this->hasMany(BlockItem::class);
   }
+  public function tenant(): BelongsTo {
+    return $this->belongsTo(Tenant::class);
+  }
 }

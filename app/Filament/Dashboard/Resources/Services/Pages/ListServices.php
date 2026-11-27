@@ -8,12 +8,14 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListServices extends ListRecords
 {
-    protected static string $resource = ServiceResource::class;
+  protected static string $resource = ServiceResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
+  protected function getHeaderActions(): array
+  {
+    return [
+      CreateAction::make()
+        ->icon('lucide-engine')
+        ->label('Nuevo Bloque de Servicios'),
+    ];
+  }
 }
