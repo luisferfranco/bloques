@@ -22,7 +22,7 @@ class Page extends Model
   public function blocks(): BelongsToMany
   {
     return $this->belongsToMany(Block::class)
-      ->withPivot(['sort_order', 'meta', 'display_mode', ])
+      ->withPivot(['sort_order', 'meta', 'display_mode'])
       ->withTimestamps()
       ->orderByPivot('sort_order');
   }

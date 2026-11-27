@@ -8,6 +8,7 @@ use App\Models\Block;
 use App\Models\BlockType;
 use Filament\Actions\Action;
 use Filament\Actions\AssociateAction;
+use Filament\Actions\AttachAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -24,6 +25,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class BlocksRelationManager extends RelationManager
@@ -78,7 +80,7 @@ class BlocksRelationManager extends RelationManager
   {
     return $table
       ->reorderable('sort_order')
-      ->recordTitleAttribute('id')
+      ->recordTitleAttribute('name')
       ->columns([
         TextColumn::make('blockType.name')
           ->label('Tipo de Bloque')
@@ -125,9 +127,15 @@ class BlocksRelationManager extends RelationManager
               'sort_order' => $sortOrder,
             ]);
           }),
-        AssociateAction::make()
+        AttachAction::make()
           ->label('Asociar Bloque Existente')
-          ->icon('lucide-blocks'),
+          ->icon('lucide-blocks')
+          ->preloadRecordSelect()
+          ->recordSelectOptionsQuery(fn (Builder $query) =>
+            $query->where('tenant_id', $this->getOwnerRecord()->tenant_id)
+          )
+          ->recordSelect(fn (Select $select) => $select->preload()),
+
       ])
       ->recordActions([
         EditAction::make()

@@ -87,17 +87,17 @@ class BlockItemsRelationManager extends RelationManager
         Select::make('icon')
           ->label('Icono')
           ->options([
-            'lucide-engine'               => 'Motor',
-            'lucide-toolbox'              => 'Caja de herramientas',
-            'lucide-wrench'               => 'Llave inglesa',
-            'lucide-drill'                => 'Herramienta Pneumática',
-            'lucide-paintbrush-vertical'  => 'Pintura',
-            'lucide-sparkles'             => 'Brillo',
+            'lucide-cylinder'             => 'Aceite',
             'lucide-car-battery'          => 'Batería de coche',
+            'lucide-sparkles'             => 'Brillo',
+            'lucide-toolbox'              => 'Caja de herramientas',
             'lucide-car'                  => 'Coche',
             'lucide-zap'                  => 'Electricidad',
             'lucide-fuel'                 => 'Gasolina',
-            'lucide-cylinder'             => 'Aceite',
+            'lucide-drill'                => 'Herramienta Pneumática',
+            'lucide-wrench'               => 'Llave inglesa',
+            'lucide-engine'               => 'Motor',
+            'lucide-paintbrush-vertical'  => 'Pintura',
           ])
           ->suffixIcon(fn (?string $state) => $state)
           ->live()

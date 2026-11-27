@@ -10,6 +10,7 @@ use App\Filament\Dashboard\Resources\Services\Schemas\ServiceForm;
 use App\Filament\Dashboard\Resources\Services\Tables\ServicesTable;
 use App\Models\Block;
 use BackedEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
@@ -50,5 +51,13 @@ class ServiceResource extends Resource
       'create' => CreateService::route('/create'),
       'edit' => EditService::route('/{record}/edit'),
     ];
+  }
+
+  public static function getEloquentQuery(): Builder
+  {
+    return parent::getEloquentQuery()
+      ->whereHas('blockType', fn (Builder $query) =>
+        $query->where('slug', 'services')
+      );
   }
 }
