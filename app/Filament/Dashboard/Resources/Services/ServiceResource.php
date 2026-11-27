@@ -5,14 +5,13 @@ namespace App\Filament\Dashboard\Resources\Services;
 use App\Filament\Dashboard\Resources\Services\Pages\CreateService;
 use App\Filament\Dashboard\Resources\Services\Pages\EditService;
 use App\Filament\Dashboard\Resources\Services\Pages\ListServices;
+use App\Filament\Dashboard\Resources\Services\RelationManagers\BlockItemsRelationManager;
 use App\Filament\Dashboard\Resources\Services\Schemas\ServiceForm;
 use App\Filament\Dashboard\Resources\Services\Tables\ServicesTable;
 use App\Models\Block;
-use App\Models\Service;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use UnitEnum;
 
@@ -40,7 +39,7 @@ class ServiceResource extends Resource
   public static function getRelations(): array
   {
     return [
-      //
+      BlockItemsRelationManager::class,
     ];
   }
 
